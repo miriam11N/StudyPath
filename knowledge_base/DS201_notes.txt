@@ -1,0 +1,7 @@
+Course: Data Science Fundamentals
+
+Data cleaning handles missing values, duplicates, formatting errors, and invalid records.
+Pandas is used to load, filter, group, and transform tabular data. Data visualization
+uses charts to communicate patterns. Statistics describes data using mean, median,
+spread, and distributions. Regression predicts numeric values, while classification
+predicts categories or labels.

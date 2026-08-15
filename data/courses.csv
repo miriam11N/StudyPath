@@ -1,0 +1,5 @@
+course_id,course_name,topics,exam_days_away
+CS101,Introduction to Python,Variables; Data Types; Loops; Functions; Lists; Dictionaries; File Handling,21
+DS201,Data Science Fundamentals,Data Cleaning; Pandas; Data Visualization; Statistics; Regression; Classification,28
+MATH150,College Algebra,Linear Equations; Functions; Polynomials; Exponents; Quadratic Equations; Graphing,18
+BUS220,Business Analytics,Excel; KPIs; Descriptive Statistics; Forecasting; Dashboards; Decision Making,24

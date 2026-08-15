@@ -1,0 +1,156 @@
+student_id,course_id,course_name,exam_days_away,weekly_study_hours,preferred_session_minutes,study_style,latest_quiz_score,missed_sessions,risk_level
+STU001,BUS220,Business Analytics,24,4,45,Practice-based,79,4,On Track
+STU002,DS201,Data Science Fundamentals,28,5,25,Mixed,69,3,Needs Support
+STU002,MATH150,College Algebra,18,5,25,Mixed,82,4,On Track
+STU003,BUS220,Business Analytics,24,5,30,Practice-based,96,3,On Track
+STU003,DS201,Data Science Fundamentals,28,5,30,Practice-based,68,1,Needs Support
+STU004,BUS220,Business Analytics,24,4,30,Mixed,68,2,Needs Support
+STU004,DS201,Data Science Fundamentals,28,4,30,Mixed,97,1,On Track
+STU005,MATH150,College Algebra,18,8,25,Practice-based,84,3,On Track
+STU005,BUS220,Business Analytics,24,8,25,Practice-based,64,1,Needs Support
+STU006,DS201,Data Science Fundamentals,28,10,45,Practice-based,80,0,On Track
+STU006,BUS220,Business Analytics,24,10,45,Practice-based,64,2,Needs Support
+STU007,MATH150,College Algebra,18,5,25,Mixed,64,2,Needs Support
+STU008,CS101,Introduction to Python,21,10,45,Visual,75,0,On Track
+STU008,DS201,Data Science Fundamentals,28,10,45,Visual,41,1,High Risk
+STU009,CS101,Introduction to Python,21,5,60,Visual,44,3,High Risk
+STU010,MATH150,College Algebra,18,10,30,Visual,63,1,Needs Support
+STU011,MATH150,College Algebra,18,8,25,Practice-based,55,3,High Risk
+STU012,BUS220,Business Analytics,24,12,45,Mixed,77,3,On Track
+STU012,MATH150,College Algebra,18,12,45,Mixed,57,3,High Risk
+STU013,BUS220,Business Analytics,24,6,45,Reading,49,3,High Risk
+STU014,BUS220,Business Analytics,24,5,30,Practice-based,95,0,On Track
+STU014,MATH150,College Algebra,18,5,30,Practice-based,68,4,Needs Support
+STU015,CS101,Introduction to Python,21,12,45,Practice-based,73,0,Needs Support
+STU015,BUS220,Business Analytics,24,12,45,Practice-based,49,2,High Risk
+STU016,DS201,Data Science Fundamentals,28,4,30,Visual,63,3,Needs Support
+STU016,BUS220,Business Analytics,24,4,30,Visual,73,3,Needs Support
+STU017,DS201,Data Science Fundamentals,28,12,45,Visual,53,1,High Risk
+STU018,DS201,Data Science Fundamentals,28,10,30,Mixed,78,3,On Track
+STU018,CS101,Introduction to Python,21,10,30,Mixed,62,0,Needs Support
+STU019,DS201,Data Science Fundamentals,28,6,45,Practice-based,67,3,Needs Support
+STU019,CS101,Introduction to Python,21,6,45,Practice-based,62,1,Needs Support
+STU020,DS201,Data Science Fundamentals,28,8,60,Mixed,100,4,On Track
+STU020,CS101,Introduction to Python,21,8,60,Mixed,71,4,Needs Support
+STU021,BUS220,Business Analytics,24,6,60,Visual,55,4,High Risk
+STU022,CS101,Introduction to Python,21,5,30,Practice-based,85,3,On Track
+STU023,BUS220,Business Analytics,24,5,60,Mixed,52,1,High Risk
+STU024,MATH150,College Algebra,18,8,25,Visual,75,3,On Track
+STU025,DS201,Data Science Fundamentals,28,8,45,Visual,40,3,High Risk
+STU025,CS101,Introduction to Python,21,8,45,Visual,50,2,High Risk
+STU026,MATH150,College Algebra,18,6,60,Visual,75,3,On Track
+STU026,CS101,Introduction to Python,21,6,60,Visual,83,2,On Track
+STU027,MATH150,College Algebra,18,6,25,Reading,74,0,Needs Support
+STU027,DS201,Data Science Fundamentals,28,6,25,Reading,70,3,Needs Support
+STU028,BUS220,Business Analytics,24,7,30,Reading,67,4,Needs Support
+STU029,BUS220,Business Analytics,24,4,45,Mixed,48,1,High Risk
+STU030,BUS220,Business Analytics,24,10,45,Practice-based,60,0,Needs Support
+STU031,CS101,Introduction to Python,21,5,25,Mixed,64,1,Needs Support
+STU032,DS201,Data Science Fundamentals,28,6,30,Mixed,88,1,On Track
+STU033,BUS220,Business Analytics,24,8,60,Practice-based,77,3,On Track
+STU034,BUS220,Business Analytics,24,7,45,Mixed,43,1,High Risk
+STU035,MATH150,College Algebra,18,15,60,Visual,77,2,On Track
+STU035,DS201,Data Science Fundamentals,28,15,60,Visual,65,2,Needs Support
+STU036,BUS220,Business Analytics,24,5,45,Visual,61,4,Needs Support
+STU037,DS201,Data Science Fundamentals,28,7,30,Visual,81,2,On Track
+STU038,CS101,Introduction to Python,21,7,25,Visual,88,0,On Track
+STU039,MATH150,College Algebra,18,5,30,Reading,86,3,On Track
+STU039,CS101,Introduction to Python,21,5,30,Reading,58,3,High Risk
+STU040,DS201,Data Science Fundamentals,28,7,30,Mixed,67,4,Needs Support
+STU041,DS201,Data Science Fundamentals,28,12,30,Visual,77,2,On Track
+STU042,DS201,Data Science Fundamentals,28,10,60,Mixed,87,0,On Track
+STU043,DS201,Data Science Fundamentals,28,5,25,Mixed,64,3,Needs Support
+STU043,CS101,Introduction to Python,21,5,25,Mixed,69,2,Needs Support
+STU044,CS101,Introduction to Python,21,5,30,Practice-based,54,2,High Risk
+STU045,DS201,Data Science Fundamentals,28,15,30,Mixed,52,3,High Risk
+STU046,DS201,Data Science Fundamentals,28,15,30,Visual,85,2,On Track
+STU047,DS201,Data Science Fundamentals,28,5,25,Visual,93,1,On Track
+STU047,CS101,Introduction to Python,21,5,25,Visual,70,3,Needs Support
+STU048,DS201,Data Science Fundamentals,28,6,60,Mixed,88,4,On Track
+STU049,CS101,Introduction to Python,21,12,25,Practice-based,77,4,On Track
+STU049,BUS220,Business Analytics,24,12,25,Practice-based,61,3,Needs Support
+STU050,CS101,Introduction to Python,21,12,45,Mixed,77,4,On Track
+STU050,DS201,Data Science Fundamentals,28,12,45,Mixed,96,2,On Track
+STU051,MATH150,College Algebra,18,15,30,Practice-based,71,0,Needs Support
+STU051,CS101,Introduction to Python,21,15,30,Practice-based,97,2,On Track
+STU052,MATH150,College Algebra,18,4,25,Reading,35,3,High Risk
+STU052,DS201,Data Science Fundamentals,28,4,25,Reading,85,4,On Track
+STU053,MATH150,College Algebra,18,15,30,Visual,73,0,Needs Support
+STU053,BUS220,Business Analytics,24,15,30,Visual,67,3,Needs Support
+STU054,CS101,Introduction to Python,21,6,25,Visual,73,3,Needs Support
+STU054,MATH150,College Algebra,18,6,25,Visual,40,1,High Risk
+STU055,CS101,Introduction to Python,21,12,25,Practice-based,68,2,Needs Support
+STU055,BUS220,Business Analytics,24,12,25,Practice-based,77,2,On Track
+STU056,MATH150,College Algebra,18,4,25,Mixed,95,0,On Track
+STU056,BUS220,Business Analytics,24,4,25,Mixed,63,4,Needs Support
+STU057,DS201,Data Science Fundamentals,28,10,45,Practice-based,59,1,High Risk
+STU058,BUS220,Business Analytics,24,7,45,Mixed,63,4,Needs Support
+STU058,CS101,Introduction to Python,21,7,45,Mixed,86,1,On Track
+STU059,CS101,Introduction to Python,21,15,45,Visual,77,3,On Track
+STU059,MATH150,College Algebra,18,15,45,Visual,63,3,Needs Support
+STU060,BUS220,Business Analytics,24,5,25,Practice-based,80,2,On Track
+STU061,CS101,Introduction to Python,21,6,45,Visual,73,1,Needs Support
+STU062,MATH150,College Algebra,18,10,45,Practice-based,87,4,On Track
+STU062,CS101,Introduction to Python,21,10,45,Practice-based,60,2,Needs Support
+STU063,MATH150,College Algebra,18,8,25,Reading,66,4,Needs Support
+STU063,BUS220,Business Analytics,24,8,25,Reading,65,2,Needs Support
+STU064,MATH150,College Algebra,18,6,45,Visual,48,4,High Risk
+STU064,DS201,Data Science Fundamentals,28,6,45,Visual,76,2,On Track
+STU065,MATH150,College Algebra,18,6,45,Reading,76,3,On Track
+STU065,BUS220,Business Analytics,24,6,45,Reading,72,2,Needs Support
+STU066,DS201,Data Science Fundamentals,28,10,30,Reading,68,1,Needs Support
+STU066,MATH150,College Algebra,18,10,30,Reading,49,0,High Risk
+STU067,DS201,Data Science Fundamentals,28,8,25,Visual,65,0,Needs Support
+STU068,DS201,Data Science Fundamentals,28,8,25,Visual,66,1,Needs Support
+STU069,MATH150,College Algebra,18,8,30,Mixed,59,4,High Risk
+STU069,DS201,Data Science Fundamentals,28,8,30,Mixed,69,4,Needs Support
+STU070,MATH150,College Algebra,18,4,25,Visual,78,1,On Track
+STU070,DS201,Data Science Fundamentals,28,4,25,Visual,100,2,On Track
+STU071,CS101,Introduction to Python,21,4,45,Practice-based,74,1,Needs Support
+STU072,BUS220,Business Analytics,24,4,45,Reading,76,4,On Track
+STU072,DS201,Data Science Fundamentals,28,4,45,Reading,70,1,Needs Support
+STU073,BUS220,Business Analytics,24,10,30,Practice-based,41,0,High Risk
+STU073,CS101,Introduction to Python,21,10,30,Practice-based,71,4,Needs Support
+STU074,CS101,Introduction to Python,21,10,60,Practice-based,72,1,Needs Support
+STU074,MATH150,College Algebra,18,10,60,Practice-based,100,3,On Track
+STU075,BUS220,Business Analytics,24,6,30,Mixed,68,4,Needs Support
+STU076,CS101,Introduction to Python,21,10,60,Practice-based,76,3,On Track
+STU076,BUS220,Business Analytics,24,10,60,Practice-based,71,3,Needs Support
+STU077,CS101,Introduction to Python,21,5,60,Visual,53,0,High Risk
+STU077,MATH150,College Algebra,18,5,60,Visual,90,2,On Track
+STU078,CS101,Introduction to Python,21,7,30,Mixed,84,0,On Track
+STU078,DS201,Data Science Fundamentals,28,7,30,Mixed,84,3,On Track
+STU079,BUS220,Business Analytics,24,7,30,Visual,57,4,High Risk
+STU079,MATH150,College Algebra,18,7,30,Visual,94,0,On Track
+STU080,BUS220,Business Analytics,24,12,45,Reading,49,4,High Risk
+STU081,DS201,Data Science Fundamentals,28,8,45,Mixed,81,1,On Track
+STU081,BUS220,Business Analytics,24,8,45,Mixed,100,0,On Track
+STU082,MATH150,College Algebra,18,10,25,Visual,56,4,High Risk
+STU082,BUS220,Business Analytics,24,10,25,Visual,62,4,Needs Support
+STU083,DS201,Data Science Fundamentals,28,6,45,Visual,73,3,Needs Support
+STU084,BUS220,Business Analytics,24,12,45,Reading,63,2,Needs Support
+STU084,MATH150,College Algebra,18,12,45,Reading,47,4,High Risk
+STU085,DS201,Data Science Fundamentals,28,5,60,Practice-based,73,4,Needs Support
+STU085,MATH150,College Algebra,18,5,60,Practice-based,55,4,High Risk
+STU086,CS101,Introduction to Python,21,12,25,Practice-based,79,0,On Track
+STU087,DS201,Data Science Fundamentals,28,5,45,Reading,57,1,High Risk
+STU088,CS101,Introduction to Python,21,8,45,Mixed,96,0,On Track
+STU088,BUS220,Business Analytics,24,8,45,Mixed,59,1,High Risk
+STU089,BUS220,Business Analytics,24,8,30,Practice-based,66,4,Needs Support
+STU090,BUS220,Business Analytics,24,6,45,Mixed,85,0,On Track
+STU091,BUS220,Business Analytics,24,8,45,Practice-based,52,4,High Risk
+STU091,DS201,Data Science Fundamentals,28,8,45,Practice-based,75,3,On Track
+STU092,MATH150,College Algebra,18,10,60,Mixed,92,1,On Track
+STU092,DS201,Data Science Fundamentals,28,10,60,Mixed,46,2,High Risk
+STU093,BUS220,Business Analytics,24,15,30,Visual,74,3,Needs Support
+STU093,DS201,Data Science Fundamentals,28,15,30,Visual,76,0,On Track
+STU094,MATH150,College Algebra,18,10,25,Practice-based,84,4,On Track
+STU095,CS101,Introduction to Python,21,7,30,Practice-based,52,0,High Risk
+STU096,CS101,Introduction to Python,21,7,60,Visual,50,1,High Risk
+STU097,BUS220,Business Analytics,24,7,60,Mixed,80,0,On Track
+STU097,MATH150,College Algebra,18,7,60,Mixed,76,0,On Track
+STU098,BUS220,Business Analytics,24,6,25,Visual,76,4,On Track
+STU099,CS101,Introduction to Python,21,7,30,Mixed,77,0,On Track
+STU099,BUS220,Business Analytics,24,7,30,Mixed,61,3,Needs Support
+STU100,CS101,Introduction to Python,21,7,25,Mixed,75,3,On Track
+STU100,DS201,Data Science Fundamentals,28,7,25,Mixed,76,2,On Track

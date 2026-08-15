@@ -1,0 +1,6 @@
+Course: College Algebra
+
+Linear equations contain variables with power one. Functions map each input to one output.
+Polynomials combine variables, coefficients, and exponents. Exponent rules simplify powers.
+Quadratic equations are often solved by factoring, completing the square, or the quadratic
+formula. Graphing helps visualize relationships between variables.

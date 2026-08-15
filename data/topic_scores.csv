@@ -1,0 +1,967 @@
+student_id,course_id,course_name,topic,topic_quiz_score,mastery_level
+STU001,BUS220,Business Analytics,Excel,70,Developing
+STU001,BUS220,Business Analytics,KPIs,100,Strong
+STU001,BUS220,Business Analytics,Descriptive Statistics,84,Strong
+STU001,BUS220,Business Analytics,Forecasting,64,Developing
+STU001,BUS220,Business Analytics,Dashboards,86,Strong
+STU001,BUS220,Business Analytics,Decision Making,67,Developing
+STU002,DS201,Data Science Fundamentals,Data Cleaning,78,Strong
+STU002,DS201,Data Science Fundamentals,Pandas,82,Strong
+STU002,DS201,Data Science Fundamentals,Data Visualization,59,Weak
+STU002,DS201,Data Science Fundamentals,Statistics,80,Strong
+STU002,DS201,Data Science Fundamentals,Regression,73,Developing
+STU002,DS201,Data Science Fundamentals,Classification,78,Strong
+STU002,MATH150,College Algebra,Linear Equations,100,Strong
+STU002,MATH150,College Algebra,Functions,79,Strong
+STU002,MATH150,College Algebra,Polynomials,72,Developing
+STU002,MATH150,College Algebra,Exponents,71,Developing
+STU002,MATH150,College Algebra,Quadratic Equations,72,Developing
+STU002,MATH150,College Algebra,Graphing,81,Strong
+STU003,BUS220,Business Analytics,Excel,100,Strong
+STU003,BUS220,Business Analytics,KPIs,99,Strong
+STU003,BUS220,Business Analytics,Descriptive Statistics,100,Strong
+STU003,BUS220,Business Analytics,Forecasting,96,Strong
+STU003,BUS220,Business Analytics,Dashboards,100,Strong
+STU003,BUS220,Business Analytics,Decision Making,92,Strong
+STU003,DS201,Data Science Fundamentals,Data Cleaning,100,Strong
+STU003,DS201,Data Science Fundamentals,Pandas,75,Strong
+STU003,DS201,Data Science Fundamentals,Data Visualization,57,Weak
+STU003,DS201,Data Science Fundamentals,Statistics,55,Weak
+STU003,DS201,Data Science Fundamentals,Regression,73,Developing
+STU003,DS201,Data Science Fundamentals,Classification,65,Developing
+STU004,BUS220,Business Analytics,Excel,76,Strong
+STU004,BUS220,Business Analytics,KPIs,73,Developing
+STU004,BUS220,Business Analytics,Descriptive Statistics,67,Developing
+STU004,BUS220,Business Analytics,Forecasting,57,Weak
+STU004,BUS220,Business Analytics,Dashboards,49,Weak
+STU004,BUS220,Business Analytics,Decision Making,62,Developing
+STU004,DS201,Data Science Fundamentals,Data Cleaning,100,Strong
+STU004,DS201,Data Science Fundamentals,Pandas,99,Strong
+STU004,DS201,Data Science Fundamentals,Data Visualization,82,Strong
+STU004,DS201,Data Science Fundamentals,Statistics,99,Strong
+STU004,DS201,Data Science Fundamentals,Regression,100,Strong
+STU004,DS201,Data Science Fundamentals,Classification,86,Strong
+STU005,MATH150,College Algebra,Linear Equations,85,Strong
+STU005,MATH150,College Algebra,Functions,84,Strong
+STU005,MATH150,College Algebra,Polynomials,70,Developing
+STU005,MATH150,College Algebra,Exponents,88,Strong
+STU005,MATH150,College Algebra,Quadratic Equations,90,Strong
+STU005,MATH150,College Algebra,Graphing,96,Strong
+STU005,BUS220,Business Analytics,Excel,76,Strong
+STU005,BUS220,Business Analytics,KPIs,47,Weak
+STU005,BUS220,Business Analytics,Descriptive Statistics,52,Weak
+STU005,BUS220,Business Analytics,Forecasting,70,Developing
+STU005,BUS220,Business Analytics,Dashboards,70,Developing
+STU005,BUS220,Business Analytics,Decision Making,70,Developing
+STU006,DS201,Data Science Fundamentals,Data Cleaning,100,Strong
+STU006,DS201,Data Science Fundamentals,Pandas,86,Strong
+STU006,DS201,Data Science Fundamentals,Data Visualization,93,Strong
+STU006,DS201,Data Science Fundamentals,Statistics,91,Strong
+STU006,DS201,Data Science Fundamentals,Regression,87,Strong
+STU006,DS201,Data Science Fundamentals,Classification,76,Strong
+STU006,BUS220,Business Analytics,Excel,73,Developing
+STU006,BUS220,Business Analytics,KPIs,54,Weak
+STU006,BUS220,Business Analytics,Descriptive Statistics,61,Developing
+STU006,BUS220,Business Analytics,Forecasting,58,Weak
+STU006,BUS220,Business Analytics,Dashboards,64,Developing
+STU006,BUS220,Business Analytics,Decision Making,91,Strong
+STU007,MATH150,College Algebra,Linear Equations,41,Weak
+STU007,MATH150,College Algebra,Functions,72,Developing
+STU007,MATH150,College Algebra,Polynomials,44,Weak
+STU007,MATH150,College Algebra,Exponents,58,Weak
+STU007,MATH150,College Algebra,Quadratic Equations,77,Strong
+STU007,MATH150,College Algebra,Graphing,64,Developing
+STU008,CS101,Introduction to Python,Variables,62,Developing
+STU008,CS101,Introduction to Python,Data Types,66,Developing
+STU008,CS101,Introduction to Python,Loops,83,Strong
+STU008,CS101,Introduction to Python,Functions,66,Developing
+STU008,CS101,Introduction to Python,Lists,77,Strong
+STU008,CS101,Introduction to Python,Dictionaries,75,Strong
+STU008,CS101,Introduction to Python,File Handling,67,Developing
+STU008,DS201,Data Science Fundamentals,Data Cleaning,66,Developing
+STU008,DS201,Data Science Fundamentals,Pandas,48,Weak
+STU008,DS201,Data Science Fundamentals,Data Visualization,30,Weak
+STU008,DS201,Data Science Fundamentals,Statistics,43,Weak
+STU008,DS201,Data Science Fundamentals,Regression,33,Weak
+STU008,DS201,Data Science Fundamentals,Classification,51,Weak
+STU009,CS101,Introduction to Python,Variables,34,Weak
+STU009,CS101,Introduction to Python,Data Types,42,Weak
+STU009,CS101,Introduction to Python,Loops,50,Weak
+STU009,CS101,Introduction to Python,Functions,54,Weak
+STU009,CS101,Introduction to Python,Lists,30,Weak
+STU009,CS101,Introduction to Python,Dictionaries,39,Weak
+STU009,CS101,Introduction to Python,File Handling,38,Weak
+STU010,MATH150,College Algebra,Linear Equations,55,Weak
+STU010,MATH150,College Algebra,Functions,84,Strong
+STU010,MATH150,College Algebra,Polynomials,67,Developing
+STU010,MATH150,College Algebra,Exponents,47,Weak
+STU010,MATH150,College Algebra,Quadratic Equations,74,Developing
+STU010,MATH150,College Algebra,Graphing,88,Strong
+STU011,MATH150,College Algebra,Linear Equations,67,Developing
+STU011,MATH150,College Algebra,Functions,36,Weak
+STU011,MATH150,College Algebra,Polynomials,49,Weak
+STU011,MATH150,College Algebra,Exponents,70,Developing
+STU011,MATH150,College Algebra,Quadratic Equations,46,Weak
+STU011,MATH150,College Algebra,Graphing,60,Developing
+STU012,BUS220,Business Analytics,Excel,86,Strong
+STU012,BUS220,Business Analytics,KPIs,65,Developing
+STU012,BUS220,Business Analytics,Descriptive Statistics,76,Strong
+STU012,BUS220,Business Analytics,Forecasting,38,Weak
+STU012,BUS220,Business Analytics,Dashboards,64,Developing
+STU012,BUS220,Business Analytics,Decision Making,73,Developing
+STU012,MATH150,College Algebra,Linear Equations,42,Weak
+STU012,MATH150,College Algebra,Functions,76,Strong
+STU012,MATH150,College Algebra,Polynomials,39,Weak
+STU012,MATH150,College Algebra,Exponents,51,Weak
+STU012,MATH150,College Algebra,Quadratic Equations,58,Weak
+STU012,MATH150,College Algebra,Graphing,74,Developing
+STU013,BUS220,Business Analytics,Excel,31,Weak
+STU013,BUS220,Business Analytics,KPIs,62,Developing
+STU013,BUS220,Business Analytics,Descriptive Statistics,49,Weak
+STU013,BUS220,Business Analytics,Forecasting,37,Weak
+STU013,BUS220,Business Analytics,Dashboards,54,Weak
+STU013,BUS220,Business Analytics,Decision Making,51,Weak
+STU014,BUS220,Business Analytics,Excel,87,Strong
+STU014,BUS220,Business Analytics,KPIs,95,Strong
+STU014,BUS220,Business Analytics,Descriptive Statistics,90,Strong
+STU014,BUS220,Business Analytics,Forecasting,96,Strong
+STU014,BUS220,Business Analytics,Dashboards,100,Strong
+STU014,BUS220,Business Analytics,Decision Making,100,Strong
+STU014,MATH150,College Algebra,Linear Equations,53,Weak
+STU014,MATH150,College Algebra,Functions,93,Strong
+STU014,MATH150,College Algebra,Polynomials,44,Weak
+STU014,MATH150,College Algebra,Exponents,66,Developing
+STU014,MATH150,College Algebra,Quadratic Equations,75,Strong
+STU014,MATH150,College Algebra,Graphing,71,Developing
+STU015,CS101,Introduction to Python,Variables,65,Developing
+STU015,CS101,Introduction to Python,Data Types,70,Developing
+STU015,CS101,Introduction to Python,Loops,67,Developing
+STU015,CS101,Introduction to Python,Functions,65,Developing
+STU015,CS101,Introduction to Python,Lists,83,Strong
+STU015,CS101,Introduction to Python,Dictionaries,77,Strong
+STU015,CS101,Introduction to Python,File Handling,64,Developing
+STU015,BUS220,Business Analytics,Excel,59,Weak
+STU015,BUS220,Business Analytics,KPIs,52,Weak
+STU015,BUS220,Business Analytics,Descriptive Statistics,58,Weak
+STU015,BUS220,Business Analytics,Forecasting,56,Weak
+STU015,BUS220,Business Analytics,Dashboards,39,Weak
+STU015,BUS220,Business Analytics,Decision Making,42,Weak
+STU016,DS201,Data Science Fundamentals,Data Cleaning,71,Developing
+STU016,DS201,Data Science Fundamentals,Pandas,70,Developing
+STU016,DS201,Data Science Fundamentals,Data Visualization,62,Developing
+STU016,DS201,Data Science Fundamentals,Statistics,64,Developing
+STU016,DS201,Data Science Fundamentals,Regression,78,Strong
+STU016,DS201,Data Science Fundamentals,Classification,55,Weak
+STU016,BUS220,Business Analytics,Excel,79,Strong
+STU016,BUS220,Business Analytics,KPIs,70,Developing
+STU016,BUS220,Business Analytics,Descriptive Statistics,70,Developing
+STU016,BUS220,Business Analytics,Forecasting,86,Strong
+STU016,BUS220,Business Analytics,Dashboards,82,Strong
+STU016,BUS220,Business Analytics,Decision Making,82,Strong
+STU017,DS201,Data Science Fundamentals,Data Cleaning,68,Developing
+STU017,DS201,Data Science Fundamentals,Pandas,53,Weak
+STU017,DS201,Data Science Fundamentals,Data Visualization,61,Developing
+STU017,DS201,Data Science Fundamentals,Statistics,49,Weak
+STU017,DS201,Data Science Fundamentals,Regression,56,Weak
+STU017,DS201,Data Science Fundamentals,Classification,51,Weak
+STU018,DS201,Data Science Fundamentals,Data Cleaning,79,Strong
+STU018,DS201,Data Science Fundamentals,Pandas,85,Strong
+STU018,DS201,Data Science Fundamentals,Data Visualization,68,Developing
+STU018,DS201,Data Science Fundamentals,Statistics,100,Strong
+STU018,DS201,Data Science Fundamentals,Regression,65,Developing
+STU018,DS201,Data Science Fundamentals,Classification,63,Developing
+STU018,CS101,Introduction to Python,Variables,75,Strong
+STU018,CS101,Introduction to Python,Data Types,71,Developing
+STU018,CS101,Introduction to Python,Loops,69,Developing
+STU018,CS101,Introduction to Python,Functions,69,Developing
+STU018,CS101,Introduction to Python,Lists,61,Developing
+STU018,CS101,Introduction to Python,Dictionaries,51,Weak
+STU018,CS101,Introduction to Python,File Handling,62,Developing
+STU019,DS201,Data Science Fundamentals,Data Cleaning,58,Weak
+STU019,DS201,Data Science Fundamentals,Pandas,78,Strong
+STU019,DS201,Data Science Fundamentals,Data Visualization,65,Developing
+STU019,DS201,Data Science Fundamentals,Statistics,57,Weak
+STU019,DS201,Data Science Fundamentals,Regression,63,Developing
+STU019,DS201,Data Science Fundamentals,Classification,71,Developing
+STU019,CS101,Introduction to Python,Variables,55,Weak
+STU019,CS101,Introduction to Python,Data Types,52,Weak
+STU019,CS101,Introduction to Python,Loops,64,Developing
+STU019,CS101,Introduction to Python,Functions,64,Developing
+STU019,CS101,Introduction to Python,Lists,55,Weak
+STU019,CS101,Introduction to Python,Dictionaries,56,Weak
+STU019,CS101,Introduction to Python,File Handling,64,Developing
+STU020,DS201,Data Science Fundamentals,Data Cleaning,82,Strong
+STU020,DS201,Data Science Fundamentals,Pandas,83,Strong
+STU020,DS201,Data Science Fundamentals,Data Visualization,91,Strong
+STU020,DS201,Data Science Fundamentals,Statistics,97,Strong
+STU020,DS201,Data Science Fundamentals,Regression,100,Strong
+STU020,DS201,Data Science Fundamentals,Classification,100,Strong
+STU020,CS101,Introduction to Python,Variables,81,Strong
+STU020,CS101,Introduction to Python,Data Types,69,Developing
+STU020,CS101,Introduction to Python,Loops,70,Developing
+STU020,CS101,Introduction to Python,Functions,58,Weak
+STU020,CS101,Introduction to Python,Lists,70,Developing
+STU020,CS101,Introduction to Python,Dictionaries,67,Developing
+STU020,CS101,Introduction to Python,File Handling,74,Developing
+STU021,BUS220,Business Analytics,Excel,45,Weak
+STU021,BUS220,Business Analytics,KPIs,61,Developing
+STU021,BUS220,Business Analytics,Descriptive Statistics,73,Developing
+STU021,BUS220,Business Analytics,Forecasting,53,Weak
+STU021,BUS220,Business Analytics,Dashboards,59,Weak
+STU021,BUS220,Business Analytics,Decision Making,63,Developing
+STU022,CS101,Introduction to Python,Variables,80,Strong
+STU022,CS101,Introduction to Python,Data Types,87,Strong
+STU022,CS101,Introduction to Python,Loops,85,Strong
+STU022,CS101,Introduction to Python,Functions,86,Strong
+STU022,CS101,Introduction to Python,Lists,75,Strong
+STU022,CS101,Introduction to Python,Dictionaries,85,Strong
+STU022,CS101,Introduction to Python,File Handling,90,Strong
+STU023,BUS220,Business Analytics,Excel,69,Developing
+STU023,BUS220,Business Analytics,KPIs,63,Developing
+STU023,BUS220,Business Analytics,Descriptive Statistics,77,Strong
+STU023,BUS220,Business Analytics,Forecasting,42,Weak
+STU023,BUS220,Business Analytics,Dashboards,62,Developing
+STU023,BUS220,Business Analytics,Decision Making,54,Weak
+STU024,MATH150,College Algebra,Linear Equations,100,Strong
+STU024,MATH150,College Algebra,Functions,65,Developing
+STU024,MATH150,College Algebra,Polynomials,64,Developing
+STU024,MATH150,College Algebra,Exponents,67,Developing
+STU024,MATH150,College Algebra,Quadratic Equations,49,Weak
+STU024,MATH150,College Algebra,Graphing,68,Developing
+STU025,DS201,Data Science Fundamentals,Data Cleaning,30,Weak
+STU025,DS201,Data Science Fundamentals,Pandas,41,Weak
+STU025,DS201,Data Science Fundamentals,Data Visualization,44,Weak
+STU025,DS201,Data Science Fundamentals,Statistics,62,Developing
+STU025,DS201,Data Science Fundamentals,Regression,51,Weak
+STU025,DS201,Data Science Fundamentals,Classification,33,Weak
+STU025,CS101,Introduction to Python,Variables,39,Weak
+STU025,CS101,Introduction to Python,Data Types,55,Weak
+STU025,CS101,Introduction to Python,Loops,34,Weak
+STU025,CS101,Introduction to Python,Functions,71,Developing
+STU025,CS101,Introduction to Python,Lists,64,Developing
+STU025,CS101,Introduction to Python,Dictionaries,44,Weak
+STU025,CS101,Introduction to Python,File Handling,30,Weak
+STU026,MATH150,College Algebra,Linear Equations,91,Strong
+STU026,MATH150,College Algebra,Functions,73,Developing
+STU026,MATH150,College Algebra,Polynomials,89,Strong
+STU026,MATH150,College Algebra,Exponents,55,Weak
+STU026,MATH150,College Algebra,Quadratic Equations,67,Developing
+STU026,MATH150,College Algebra,Graphing,75,Strong
+STU026,CS101,Introduction to Python,Variables,83,Strong
+STU026,CS101,Introduction to Python,Data Types,77,Strong
+STU026,CS101,Introduction to Python,Loops,90,Strong
+STU026,CS101,Introduction to Python,Functions,70,Developing
+STU026,CS101,Introduction to Python,Lists,81,Strong
+STU026,CS101,Introduction to Python,Dictionaries,84,Strong
+STU026,CS101,Introduction to Python,File Handling,89,Strong
+STU027,MATH150,College Algebra,Linear Equations,82,Strong
+STU027,MATH150,College Algebra,Functions,60,Developing
+STU027,MATH150,College Algebra,Polynomials,55,Weak
+STU027,MATH150,College Algebra,Exponents,89,Strong
+STU027,MATH150,College Algebra,Quadratic Equations,77,Strong
+STU027,MATH150,College Algebra,Graphing,65,Developing
+STU027,DS201,Data Science Fundamentals,Data Cleaning,88,Strong
+STU027,DS201,Data Science Fundamentals,Pandas,71,Developing
+STU027,DS201,Data Science Fundamentals,Data Visualization,84,Strong
+STU027,DS201,Data Science Fundamentals,Statistics,70,Developing
+STU027,DS201,Data Science Fundamentals,Regression,94,Strong
+STU027,DS201,Data Science Fundamentals,Classification,91,Strong
+STU028,BUS220,Business Analytics,Excel,64,Developing
+STU028,BUS220,Business Analytics,KPIs,78,Strong
+STU028,BUS220,Business Analytics,Descriptive Statistics,74,Developing
+STU028,BUS220,Business Analytics,Forecasting,83,Strong
+STU028,BUS220,Business Analytics,Dashboards,55,Weak
+STU028,BUS220,Business Analytics,Decision Making,75,Strong
+STU029,BUS220,Business Analytics,Excel,60,Developing
+STU029,BUS220,Business Analytics,KPIs,30,Weak
+STU029,BUS220,Business Analytics,Descriptive Statistics,33,Weak
+STU029,BUS220,Business Analytics,Forecasting,30,Weak
+STU029,BUS220,Business Analytics,Dashboards,44,Weak
+STU029,BUS220,Business Analytics,Decision Making,56,Weak
+STU030,BUS220,Business Analytics,Excel,78,Strong
+STU030,BUS220,Business Analytics,KPIs,60,Developing
+STU030,BUS220,Business Analytics,Descriptive Statistics,79,Strong
+STU030,BUS220,Business Analytics,Forecasting,43,Weak
+STU030,BUS220,Business Analytics,Dashboards,39,Weak
+STU030,BUS220,Business Analytics,Decision Making,59,Weak
+STU031,CS101,Introduction to Python,Variables,68,Developing
+STU031,CS101,Introduction to Python,Data Types,63,Developing
+STU031,CS101,Introduction to Python,Loops,39,Weak
+STU031,CS101,Introduction to Python,Functions,62,Developing
+STU031,CS101,Introduction to Python,Lists,48,Weak
+STU031,CS101,Introduction to Python,Dictionaries,72,Developing
+STU031,CS101,Introduction to Python,File Handling,68,Developing
+STU032,DS201,Data Science Fundamentals,Data Cleaning,76,Strong
+STU032,DS201,Data Science Fundamentals,Pandas,81,Strong
+STU032,DS201,Data Science Fundamentals,Data Visualization,75,Strong
+STU032,DS201,Data Science Fundamentals,Statistics,87,Strong
+STU032,DS201,Data Science Fundamentals,Regression,99,Strong
+STU032,DS201,Data Science Fundamentals,Classification,76,Strong
+STU033,BUS220,Business Analytics,Excel,83,Strong
+STU033,BUS220,Business Analytics,KPIs,70,Developing
+STU033,BUS220,Business Analytics,Descriptive Statistics,67,Developing
+STU033,BUS220,Business Analytics,Forecasting,75,Strong
+STU033,BUS220,Business Analytics,Dashboards,64,Developing
+STU033,BUS220,Business Analytics,Decision Making,70,Developing
+STU034,BUS220,Business Analytics,Excel,30,Weak
+STU034,BUS220,Business Analytics,KPIs,66,Developing
+STU034,BUS220,Business Analytics,Descriptive Statistics,43,Weak
+STU034,BUS220,Business Analytics,Forecasting,34,Weak
+STU034,BUS220,Business Analytics,Dashboards,45,Weak
+STU034,BUS220,Business Analytics,Decision Making,41,Weak
+STU035,MATH150,College Algebra,Linear Equations,74,Developing
+STU035,MATH150,College Algebra,Functions,84,Strong
+STU035,MATH150,College Algebra,Polynomials,86,Strong
+STU035,MATH150,College Algebra,Exponents,70,Developing
+STU035,MATH150,College Algebra,Quadratic Equations,70,Developing
+STU035,MATH150,College Algebra,Graphing,73,Developing
+STU035,DS201,Data Science Fundamentals,Data Cleaning,37,Weak
+STU035,DS201,Data Science Fundamentals,Pandas,46,Weak
+STU035,DS201,Data Science Fundamentals,Data Visualization,81,Strong
+STU035,DS201,Data Science Fundamentals,Statistics,84,Strong
+STU035,DS201,Data Science Fundamentals,Regression,62,Developing
+STU035,DS201,Data Science Fundamentals,Classification,71,Developing
+STU036,BUS220,Business Analytics,Excel,64,Developing
+STU036,BUS220,Business Analytics,KPIs,97,Strong
+STU036,BUS220,Business Analytics,Descriptive Statistics,74,Developing
+STU036,BUS220,Business Analytics,Forecasting,59,Weak
+STU036,BUS220,Business Analytics,Dashboards,49,Weak
+STU036,BUS220,Business Analytics,Decision Making,41,Weak
+STU037,DS201,Data Science Fundamentals,Data Cleaning,83,Strong
+STU037,DS201,Data Science Fundamentals,Pandas,71,Developing
+STU037,DS201,Data Science Fundamentals,Data Visualization,63,Developing
+STU037,DS201,Data Science Fundamentals,Statistics,73,Developing
+STU037,DS201,Data Science Fundamentals,Regression,68,Developing
+STU037,DS201,Data Science Fundamentals,Classification,100,Strong
+STU038,CS101,Introduction to Python,Variables,98,Strong
+STU038,CS101,Introduction to Python,Data Types,87,Strong
+STU038,CS101,Introduction to Python,Loops,100,Strong
+STU038,CS101,Introduction to Python,Functions,88,Strong
+STU038,CS101,Introduction to Python,Lists,77,Strong
+STU038,CS101,Introduction to Python,Dictionaries,100,Strong
+STU038,CS101,Introduction to Python,File Handling,94,Strong
+STU039,MATH150,College Algebra,Linear Equations,73,Developing
+STU039,MATH150,College Algebra,Functions,83,Strong
+STU039,MATH150,College Algebra,Polynomials,75,Strong
+STU039,MATH150,College Algebra,Exponents,69,Developing
+STU039,MATH150,College Algebra,Quadratic Equations,97,Strong
+STU039,MATH150,College Algebra,Graphing,100,Strong
+STU039,CS101,Introduction to Python,Variables,41,Weak
+STU039,CS101,Introduction to Python,Data Types,64,Developing
+STU039,CS101,Introduction to Python,Loops,50,Weak
+STU039,CS101,Introduction to Python,Functions,52,Weak
+STU039,CS101,Introduction to Python,Lists,50,Weak
+STU039,CS101,Introduction to Python,Dictionaries,47,Weak
+STU039,CS101,Introduction to Python,File Handling,58,Weak
+STU040,DS201,Data Science Fundamentals,Data Cleaning,57,Weak
+STU040,DS201,Data Science Fundamentals,Pandas,70,Developing
+STU040,DS201,Data Science Fundamentals,Data Visualization,66,Developing
+STU040,DS201,Data Science Fundamentals,Statistics,64,Developing
+STU040,DS201,Data Science Fundamentals,Regression,56,Weak
+STU040,DS201,Data Science Fundamentals,Classification,60,Developing
+STU041,DS201,Data Science Fundamentals,Data Cleaning,86,Strong
+STU041,DS201,Data Science Fundamentals,Pandas,83,Strong
+STU041,DS201,Data Science Fundamentals,Data Visualization,65,Developing
+STU041,DS201,Data Science Fundamentals,Statistics,78,Strong
+STU041,DS201,Data Science Fundamentals,Regression,86,Strong
+STU041,DS201,Data Science Fundamentals,Classification,56,Weak
+STU042,DS201,Data Science Fundamentals,Data Cleaning,93,Strong
+STU042,DS201,Data Science Fundamentals,Pandas,79,Strong
+STU042,DS201,Data Science Fundamentals,Data Visualization,93,Strong
+STU042,DS201,Data Science Fundamentals,Statistics,77,Strong
+STU042,DS201,Data Science Fundamentals,Regression,65,Developing
+STU042,DS201,Data Science Fundamentals,Classification,67,Developing
+STU043,DS201,Data Science Fundamentals,Data Cleaning,64,Developing
+STU043,DS201,Data Science Fundamentals,Pandas,67,Developing
+STU043,DS201,Data Science Fundamentals,Data Visualization,53,Weak
+STU043,DS201,Data Science Fundamentals,Statistics,71,Developing
+STU043,DS201,Data Science Fundamentals,Regression,44,Weak
+STU043,DS201,Data Science Fundamentals,Classification,63,Developing
+STU043,CS101,Introduction to Python,Variables,54,Weak
+STU043,CS101,Introduction to Python,Data Types,61,Developing
+STU043,CS101,Introduction to Python,Loops,69,Developing
+STU043,CS101,Introduction to Python,Functions,58,Weak
+STU043,CS101,Introduction to Python,Lists,64,Developing
+STU043,CS101,Introduction to Python,Dictionaries,81,Strong
+STU043,CS101,Introduction to Python,File Handling,62,Developing
+STU044,CS101,Introduction to Python,Variables,64,Developing
+STU044,CS101,Introduction to Python,Data Types,40,Weak
+STU044,CS101,Introduction to Python,Loops,60,Developing
+STU044,CS101,Introduction to Python,Functions,71,Developing
+STU044,CS101,Introduction to Python,Lists,30,Weak
+STU044,CS101,Introduction to Python,Dictionaries,44,Weak
+STU044,CS101,Introduction to Python,File Handling,60,Developing
+STU045,DS201,Data Science Fundamentals,Data Cleaning,49,Weak
+STU045,DS201,Data Science Fundamentals,Pandas,56,Weak
+STU045,DS201,Data Science Fundamentals,Data Visualization,44,Weak
+STU045,DS201,Data Science Fundamentals,Statistics,53,Weak
+STU045,DS201,Data Science Fundamentals,Regression,50,Weak
+STU045,DS201,Data Science Fundamentals,Classification,66,Developing
+STU046,DS201,Data Science Fundamentals,Data Cleaning,88,Strong
+STU046,DS201,Data Science Fundamentals,Pandas,89,Strong
+STU046,DS201,Data Science Fundamentals,Data Visualization,80,Strong
+STU046,DS201,Data Science Fundamentals,Statistics,79,Strong
+STU046,DS201,Data Science Fundamentals,Regression,79,Strong
+STU046,DS201,Data Science Fundamentals,Classification,89,Strong
+STU047,DS201,Data Science Fundamentals,Data Cleaning,87,Strong
+STU047,DS201,Data Science Fundamentals,Pandas,96,Strong
+STU047,DS201,Data Science Fundamentals,Data Visualization,100,Strong
+STU047,DS201,Data Science Fundamentals,Statistics,100,Strong
+STU047,DS201,Data Science Fundamentals,Regression,89,Strong
+STU047,DS201,Data Science Fundamentals,Classification,100,Strong
+STU047,CS101,Introduction to Python,Variables,65,Developing
+STU047,CS101,Introduction to Python,Data Types,45,Weak
+STU047,CS101,Introduction to Python,Loops,57,Weak
+STU047,CS101,Introduction to Python,Functions,47,Weak
+STU047,CS101,Introduction to Python,Lists,65,Developing
+STU047,CS101,Introduction to Python,Dictionaries,70,Developing
+STU047,CS101,Introduction to Python,File Handling,90,Strong
+STU048,DS201,Data Science Fundamentals,Data Cleaning,91,Strong
+STU048,DS201,Data Science Fundamentals,Pandas,85,Strong
+STU048,DS201,Data Science Fundamentals,Data Visualization,97,Strong
+STU048,DS201,Data Science Fundamentals,Statistics,61,Developing
+STU048,DS201,Data Science Fundamentals,Regression,90,Strong
+STU048,DS201,Data Science Fundamentals,Classification,97,Strong
+STU049,CS101,Introduction to Python,Variables,59,Weak
+STU049,CS101,Introduction to Python,Data Types,90,Strong
+STU049,CS101,Introduction to Python,Loops,81,Strong
+STU049,CS101,Introduction to Python,Functions,72,Developing
+STU049,CS101,Introduction to Python,Lists,84,Strong
+STU049,CS101,Introduction to Python,Dictionaries,100,Strong
+STU049,CS101,Introduction to Python,File Handling,79,Strong
+STU049,BUS220,Business Analytics,Excel,63,Developing
+STU049,BUS220,Business Analytics,KPIs,55,Weak
+STU049,BUS220,Business Analytics,Descriptive Statistics,50,Weak
+STU049,BUS220,Business Analytics,Forecasting,70,Developing
+STU049,BUS220,Business Analytics,Dashboards,50,Weak
+STU049,BUS220,Business Analytics,Decision Making,61,Developing
+STU050,CS101,Introduction to Python,Variables,71,Developing
+STU050,CS101,Introduction to Python,Data Types,82,Strong
+STU050,CS101,Introduction to Python,Loops,81,Strong
+STU050,CS101,Introduction to Python,Functions,89,Strong
+STU050,CS101,Introduction to Python,Lists,70,Developing
+STU050,CS101,Introduction to Python,Dictionaries,73,Developing
+STU050,CS101,Introduction to Python,File Handling,65,Developing
+STU050,DS201,Data Science Fundamentals,Data Cleaning,90,Strong
+STU050,DS201,Data Science Fundamentals,Pandas,100,Strong
+STU050,DS201,Data Science Fundamentals,Data Visualization,100,Strong
+STU050,DS201,Data Science Fundamentals,Statistics,84,Strong
+STU050,DS201,Data Science Fundamentals,Regression,100,Strong
+STU050,DS201,Data Science Fundamentals,Classification,100,Strong
+STU051,MATH150,College Algebra,Linear Equations,75,Strong
+STU051,MATH150,College Algebra,Functions,93,Strong
+STU051,MATH150,College Algebra,Polynomials,61,Developing
+STU051,MATH150,College Algebra,Exponents,56,Weak
+STU051,MATH150,College Algebra,Quadratic Equations,49,Weak
+STU051,MATH150,College Algebra,Graphing,88,Strong
+STU051,CS101,Introduction to Python,Variables,100,Strong
+STU051,CS101,Introduction to Python,Data Types,96,Strong
+STU051,CS101,Introduction to Python,Loops,100,Strong
+STU051,CS101,Introduction to Python,Functions,83,Strong
+STU051,CS101,Introduction to Python,Lists,100,Strong
+STU051,CS101,Introduction to Python,Dictionaries,98,Strong
+STU051,CS101,Introduction to Python,File Handling,98,Strong
+STU052,MATH150,College Algebra,Linear Equations,43,Weak
+STU052,MATH150,College Algebra,Functions,40,Weak
+STU052,MATH150,College Algebra,Polynomials,37,Weak
+STU052,MATH150,College Algebra,Exponents,30,Weak
+STU052,MATH150,College Algebra,Quadratic Equations,40,Weak
+STU052,MATH150,College Algebra,Graphing,57,Weak
+STU052,DS201,Data Science Fundamentals,Data Cleaning,100,Strong
+STU052,DS201,Data Science Fundamentals,Pandas,100,Strong
+STU052,DS201,Data Science Fundamentals,Data Visualization,78,Strong
+STU052,DS201,Data Science Fundamentals,Statistics,73,Developing
+STU052,DS201,Data Science Fundamentals,Regression,83,Strong
+STU052,DS201,Data Science Fundamentals,Classification,85,Strong
+STU053,MATH150,College Algebra,Linear Equations,86,Strong
+STU053,MATH150,College Algebra,Functions,52,Weak
+STU053,MATH150,College Algebra,Polynomials,91,Strong
+STU053,MATH150,College Algebra,Exponents,71,Developing
+STU053,MATH150,College Algebra,Quadratic Equations,67,Developing
+STU053,MATH150,College Algebra,Graphing,60,Developing
+STU053,BUS220,Business Analytics,Excel,47,Weak
+STU053,BUS220,Business Analytics,KPIs,76,Strong
+STU053,BUS220,Business Analytics,Descriptive Statistics,67,Developing
+STU053,BUS220,Business Analytics,Forecasting,51,Weak
+STU053,BUS220,Business Analytics,Dashboards,51,Weak
+STU053,BUS220,Business Analytics,Decision Making,62,Developing
+STU054,CS101,Introduction to Python,Variables,93,Strong
+STU054,CS101,Introduction to Python,Data Types,69,Developing
+STU054,CS101,Introduction to Python,Loops,54,Weak
+STU054,CS101,Introduction to Python,Functions,70,Developing
+STU054,CS101,Introduction to Python,Lists,69,Developing
+STU054,CS101,Introduction to Python,Dictionaries,40,Weak
+STU054,CS101,Introduction to Python,File Handling,72,Developing
+STU054,MATH150,College Algebra,Linear Equations,37,Weak
+STU054,MATH150,College Algebra,Functions,48,Weak
+STU054,MATH150,College Algebra,Polynomials,62,Developing
+STU054,MATH150,College Algebra,Exponents,53,Weak
+STU054,MATH150,College Algebra,Quadratic Equations,36,Weak
+STU054,MATH150,College Algebra,Graphing,30,Weak
+STU055,CS101,Introduction to Python,Variables,98,Strong
+STU055,CS101,Introduction to Python,Data Types,68,Developing
+STU055,CS101,Introduction to Python,Loops,68,Developing
+STU055,CS101,Introduction to Python,Functions,67,Developing
+STU055,CS101,Introduction to Python,Lists,70,Developing
+STU055,CS101,Introduction to Python,Dictionaries,66,Developing
+STU055,CS101,Introduction to Python,File Handling,61,Developing
+STU055,BUS220,Business Analytics,Excel,70,Developing
+STU055,BUS220,Business Analytics,KPIs,76,Strong
+STU055,BUS220,Business Analytics,Descriptive Statistics,70,Developing
+STU055,BUS220,Business Analytics,Forecasting,68,Developing
+STU055,BUS220,Business Analytics,Dashboards,78,Strong
+STU055,BUS220,Business Analytics,Decision Making,73,Developing
+STU056,MATH150,College Algebra,Linear Equations,100,Strong
+STU056,MATH150,College Algebra,Functions,63,Developing
+STU056,MATH150,College Algebra,Polynomials,100,Strong
+STU056,MATH150,College Algebra,Exponents,100,Strong
+STU056,MATH150,College Algebra,Quadratic Equations,70,Developing
+STU056,MATH150,College Algebra,Graphing,90,Strong
+STU056,BUS220,Business Analytics,Excel,58,Weak
+STU056,BUS220,Business Analytics,KPIs,46,Weak
+STU056,BUS220,Business Analytics,Descriptive Statistics,53,Weak
+STU056,BUS220,Business Analytics,Forecasting,49,Weak
+STU056,BUS220,Business Analytics,Dashboards,84,Strong
+STU056,BUS220,Business Analytics,Decision Making,74,Developing
+STU057,DS201,Data Science Fundamentals,Data Cleaning,74,Developing
+STU057,DS201,Data Science Fundamentals,Pandas,67,Developing
+STU057,DS201,Data Science Fundamentals,Data Visualization,45,Weak
+STU057,DS201,Data Science Fundamentals,Statistics,52,Weak
+STU057,DS201,Data Science Fundamentals,Regression,64,Developing
+STU057,DS201,Data Science Fundamentals,Classification,44,Weak
+STU058,BUS220,Business Analytics,Excel,71,Developing
+STU058,BUS220,Business Analytics,KPIs,60,Developing
+STU058,BUS220,Business Analytics,Descriptive Statistics,58,Weak
+STU058,BUS220,Business Analytics,Forecasting,71,Developing
+STU058,BUS220,Business Analytics,Dashboards,68,Developing
+STU058,BUS220,Business Analytics,Decision Making,58,Weak
+STU058,CS101,Introduction to Python,Variables,99,Strong
+STU058,CS101,Introduction to Python,Data Types,73,Developing
+STU058,CS101,Introduction to Python,Loops,93,Strong
+STU058,CS101,Introduction to Python,Functions,93,Strong
+STU058,CS101,Introduction to Python,Lists,82,Strong
+STU058,CS101,Introduction to Python,Dictionaries,89,Strong
+STU058,CS101,Introduction to Python,File Handling,70,Developing
+STU059,CS101,Introduction to Python,Variables,88,Strong
+STU059,CS101,Introduction to Python,Data Types,74,Developing
+STU059,CS101,Introduction to Python,Loops,70,Developing
+STU059,CS101,Introduction to Python,Functions,89,Strong
+STU059,CS101,Introduction to Python,Lists,68,Developing
+STU059,CS101,Introduction to Python,Dictionaries,60,Developing
+STU059,CS101,Introduction to Python,File Handling,58,Weak
+STU059,MATH150,College Algebra,Linear Equations,70,Developing
+STU059,MATH150,College Algebra,Functions,47,Weak
+STU059,MATH150,College Algebra,Polynomials,84,Strong
+STU059,MATH150,College Algebra,Exponents,38,Weak
+STU059,MATH150,College Algebra,Quadratic Equations,83,Strong
+STU059,MATH150,College Algebra,Graphing,65,Developing
+STU060,BUS220,Business Analytics,Excel,78,Strong
+STU060,BUS220,Business Analytics,KPIs,73,Developing
+STU060,BUS220,Business Analytics,Descriptive Statistics,84,Strong
+STU060,BUS220,Business Analytics,Forecasting,79,Strong
+STU060,BUS220,Business Analytics,Dashboards,93,Strong
+STU060,BUS220,Business Analytics,Decision Making,81,Strong
+STU061,CS101,Introduction to Python,Variables,74,Developing
+STU061,CS101,Introduction to Python,Data Types,68,Developing
+STU061,CS101,Introduction to Python,Loops,72,Developing
+STU061,CS101,Introduction to Python,Functions,76,Strong
+STU061,CS101,Introduction to Python,Lists,52,Weak
+STU061,CS101,Introduction to Python,Dictionaries,56,Weak
+STU061,CS101,Introduction to Python,File Handling,81,Strong
+STU062,MATH150,College Algebra,Linear Equations,89,Strong
+STU062,MATH150,College Algebra,Functions,84,Strong
+STU062,MATH150,College Algebra,Polynomials,87,Strong
+STU062,MATH150,College Algebra,Exponents,91,Strong
+STU062,MATH150,College Algebra,Quadratic Equations,80,Strong
+STU062,MATH150,College Algebra,Graphing,77,Strong
+STU062,CS101,Introduction to Python,Variables,62,Developing
+STU062,CS101,Introduction to Python,Data Types,48,Weak
+STU062,CS101,Introduction to Python,Loops,64,Developing
+STU062,CS101,Introduction to Python,Functions,39,Weak
+STU062,CS101,Introduction to Python,Lists,72,Developing
+STU062,CS101,Introduction to Python,Dictionaries,65,Developing
+STU062,CS101,Introduction to Python,File Handling,63,Developing
+STU063,MATH150,College Algebra,Linear Equations,77,Strong
+STU063,MATH150,College Algebra,Functions,85,Strong
+STU063,MATH150,College Algebra,Polynomials,78,Strong
+STU063,MATH150,College Algebra,Exponents,43,Weak
+STU063,MATH150,College Algebra,Quadratic Equations,50,Weak
+STU063,MATH150,College Algebra,Graphing,58,Weak
+STU063,BUS220,Business Analytics,Excel,65,Developing
+STU063,BUS220,Business Analytics,KPIs,71,Developing
+STU063,BUS220,Business Analytics,Descriptive Statistics,56,Weak
+STU063,BUS220,Business Analytics,Forecasting,67,Developing
+STU063,BUS220,Business Analytics,Dashboards,55,Weak
+STU063,BUS220,Business Analytics,Decision Making,57,Weak
+STU064,MATH150,College Algebra,Linear Equations,31,Weak
+STU064,MATH150,College Algebra,Functions,36,Weak
+STU064,MATH150,College Algebra,Polynomials,31,Weak
+STU064,MATH150,College Algebra,Exponents,36,Weak
+STU064,MATH150,College Algebra,Quadratic Equations,60,Developing
+STU064,MATH150,College Algebra,Graphing,36,Weak
+STU064,DS201,Data Science Fundamentals,Data Cleaning,100,Strong
+STU064,DS201,Data Science Fundamentals,Pandas,81,Strong
+STU064,DS201,Data Science Fundamentals,Data Visualization,78,Strong
+STU064,DS201,Data Science Fundamentals,Statistics,65,Developing
+STU064,DS201,Data Science Fundamentals,Regression,84,Strong
+STU064,DS201,Data Science Fundamentals,Classification,69,Developing
+STU065,MATH150,College Algebra,Linear Equations,77,Strong
+STU065,MATH150,College Algebra,Functions,100,Strong
+STU065,MATH150,College Algebra,Polynomials,74,Developing
+STU065,MATH150,College Algebra,Exponents,89,Strong
+STU065,MATH150,College Algebra,Quadratic Equations,67,Developing
+STU065,MATH150,College Algebra,Graphing,75,Strong
+STU065,BUS220,Business Analytics,Excel,93,Strong
+STU065,BUS220,Business Analytics,KPIs,64,Developing
+STU065,BUS220,Business Analytics,Descriptive Statistics,93,Strong
+STU065,BUS220,Business Analytics,Forecasting,80,Strong
+STU065,BUS220,Business Analytics,Dashboards,65,Developing
+STU065,BUS220,Business Analytics,Decision Making,79,Strong
+STU066,DS201,Data Science Fundamentals,Data Cleaning,79,Strong
+STU066,DS201,Data Science Fundamentals,Pandas,75,Strong
+STU066,DS201,Data Science Fundamentals,Data Visualization,49,Weak
+STU066,DS201,Data Science Fundamentals,Statistics,59,Weak
+STU066,DS201,Data Science Fundamentals,Regression,65,Developing
+STU066,DS201,Data Science Fundamentals,Classification,67,Developing
+STU066,MATH150,College Algebra,Linear Equations,56,Weak
+STU066,MATH150,College Algebra,Functions,51,Weak
+STU066,MATH150,College Algebra,Polynomials,32,Weak
+STU066,MATH150,College Algebra,Exponents,53,Weak
+STU066,MATH150,College Algebra,Quadratic Equations,56,Weak
+STU066,MATH150,College Algebra,Graphing,55,Weak
+STU067,DS201,Data Science Fundamentals,Data Cleaning,77,Strong
+STU067,DS201,Data Science Fundamentals,Pandas,75,Strong
+STU067,DS201,Data Science Fundamentals,Data Visualization,70,Developing
+STU067,DS201,Data Science Fundamentals,Statistics,64,Developing
+STU067,DS201,Data Science Fundamentals,Regression,45,Weak
+STU067,DS201,Data Science Fundamentals,Classification,70,Developing
+STU068,DS201,Data Science Fundamentals,Data Cleaning,68,Developing
+STU068,DS201,Data Science Fundamentals,Pandas,69,Developing
+STU068,DS201,Data Science Fundamentals,Data Visualization,50,Weak
+STU068,DS201,Data Science Fundamentals,Statistics,53,Weak
+STU068,DS201,Data Science Fundamentals,Regression,78,Strong
+STU068,DS201,Data Science Fundamentals,Classification,65,Developing
+STU069,MATH150,College Algebra,Linear Equations,67,Developing
+STU069,MATH150,College Algebra,Functions,59,Weak
+STU069,MATH150,College Algebra,Polynomials,59,Weak
+STU069,MATH150,College Algebra,Exponents,70,Developing
+STU069,MATH150,College Algebra,Quadratic Equations,52,Weak
+STU069,MATH150,College Algebra,Graphing,60,Developing
+STU069,DS201,Data Science Fundamentals,Data Cleaning,63,Developing
+STU069,DS201,Data Science Fundamentals,Pandas,63,Developing
+STU069,DS201,Data Science Fundamentals,Data Visualization,65,Developing
+STU069,DS201,Data Science Fundamentals,Statistics,71,Developing
+STU069,DS201,Data Science Fundamentals,Regression,63,Developing
+STU069,DS201,Data Science Fundamentals,Classification,84,Strong
+STU070,MATH150,College Algebra,Linear Equations,67,Developing
+STU070,MATH150,College Algebra,Functions,75,Strong
+STU070,MATH150,College Algebra,Polynomials,72,Developing
+STU070,MATH150,College Algebra,Exponents,95,Strong
+STU070,MATH150,College Algebra,Quadratic Equations,80,Strong
+STU070,MATH150,College Algebra,Graphing,90,Strong
+STU070,DS201,Data Science Fundamentals,Data Cleaning,82,Strong
+STU070,DS201,Data Science Fundamentals,Pandas,100,Strong
+STU070,DS201,Data Science Fundamentals,Data Visualization,100,Strong
+STU070,DS201,Data Science Fundamentals,Statistics,100,Strong
+STU070,DS201,Data Science Fundamentals,Regression,100,Strong
+STU070,DS201,Data Science Fundamentals,Classification,93,Strong
+STU071,CS101,Introduction to Python,Variables,90,Strong
+STU071,CS101,Introduction to Python,Data Types,100,Strong
+STU071,CS101,Introduction to Python,Loops,69,Developing
+STU071,CS101,Introduction to Python,Functions,68,Developing
+STU071,CS101,Introduction to Python,Lists,91,Strong
+STU071,CS101,Introduction to Python,Dictionaries,92,Strong
+STU071,CS101,Introduction to Python,File Handling,67,Developing
+STU072,BUS220,Business Analytics,Excel,70,Developing
+STU072,BUS220,Business Analytics,KPIs,72,Developing
+STU072,BUS220,Business Analytics,Descriptive Statistics,59,Weak
+STU072,BUS220,Business Analytics,Forecasting,64,Developing
+STU072,BUS220,Business Analytics,Dashboards,63,Developing
+STU072,BUS220,Business Analytics,Decision Making,66,Developing
+STU072,DS201,Data Science Fundamentals,Data Cleaning,69,Developing
+STU072,DS201,Data Science Fundamentals,Pandas,72,Developing
+STU072,DS201,Data Science Fundamentals,Data Visualization,88,Strong
+STU072,DS201,Data Science Fundamentals,Statistics,58,Weak
+STU072,DS201,Data Science Fundamentals,Regression,81,Strong
+STU072,DS201,Data Science Fundamentals,Classification,67,Developing
+STU073,BUS220,Business Analytics,Excel,40,Weak
+STU073,BUS220,Business Analytics,KPIs,49,Weak
+STU073,BUS220,Business Analytics,Descriptive Statistics,30,Weak
+STU073,BUS220,Business Analytics,Forecasting,45,Weak
+STU073,BUS220,Business Analytics,Dashboards,42,Weak
+STU073,BUS220,Business Analytics,Decision Making,46,Weak
+STU073,CS101,Introduction to Python,Variables,74,Developing
+STU073,CS101,Introduction to Python,Data Types,100,Strong
+STU073,CS101,Introduction to Python,Loops,63,Developing
+STU073,CS101,Introduction to Python,Functions,64,Developing
+STU073,CS101,Introduction to Python,Lists,63,Developing
+STU073,CS101,Introduction to Python,Dictionaries,64,Developing
+STU073,CS101,Introduction to Python,File Handling,63,Developing
+STU074,CS101,Introduction to Python,Variables,86,Strong
+STU074,CS101,Introduction to Python,Data Types,89,Strong
+STU074,CS101,Introduction to Python,Loops,65,Developing
+STU074,CS101,Introduction to Python,Functions,62,Developing
+STU074,CS101,Introduction to Python,Lists,77,Strong
+STU074,CS101,Introduction to Python,Dictionaries,65,Developing
+STU074,CS101,Introduction to Python,File Handling,79,Strong
+STU074,MATH150,College Algebra,Linear Equations,100,Strong
+STU074,MATH150,College Algebra,Functions,81,Strong
+STU074,MATH150,College Algebra,Polynomials,100,Strong
+STU074,MATH150,College Algebra,Exponents,100,Strong
+STU074,MATH150,College Algebra,Quadratic Equations,92,Strong
+STU074,MATH150,College Algebra,Graphing,95,Strong
+STU075,BUS220,Business Analytics,Excel,71,Developing
+STU075,BUS220,Business Analytics,KPIs,72,Developing
+STU075,BUS220,Business Analytics,Descriptive Statistics,75,Strong
+STU075,BUS220,Business Analytics,Forecasting,92,Strong
+STU075,BUS220,Business Analytics,Dashboards,65,Developing
+STU075,BUS220,Business Analytics,Decision Making,58,Weak
+STU076,CS101,Introduction to Python,Variables,59,Weak
+STU076,CS101,Introduction to Python,Data Types,67,Developing
+STU076,CS101,Introduction to Python,Loops,75,Strong
+STU076,CS101,Introduction to Python,Functions,97,Strong
+STU076,CS101,Introduction to Python,Lists,69,Developing
+STU076,CS101,Introduction to Python,Dictionaries,78,Strong
+STU076,CS101,Introduction to Python,File Handling,75,Strong
+STU076,BUS220,Business Analytics,Excel,85,Strong
+STU076,BUS220,Business Analytics,KPIs,100,Strong
+STU076,BUS220,Business Analytics,Descriptive Statistics,64,Developing
+STU076,BUS220,Business Analytics,Forecasting,65,Developing
+STU076,BUS220,Business Analytics,Dashboards,83,Strong
+STU076,BUS220,Business Analytics,Decision Making,79,Strong
+STU077,CS101,Introduction to Python,Variables,75,Strong
+STU077,CS101,Introduction to Python,Data Types,60,Developing
+STU077,CS101,Introduction to Python,Loops,48,Weak
+STU077,CS101,Introduction to Python,Functions,60,Developing
+STU077,CS101,Introduction to Python,Lists,66,Developing
+STU077,CS101,Introduction to Python,Dictionaries,62,Developing
+STU077,CS101,Introduction to Python,File Handling,59,Weak
+STU077,MATH150,College Algebra,Linear Equations,100,Strong
+STU077,MATH150,College Algebra,Functions,100,Strong
+STU077,MATH150,College Algebra,Polynomials,100,Strong
+STU077,MATH150,College Algebra,Exponents,97,Strong
+STU077,MATH150,College Algebra,Quadratic Equations,87,Strong
+STU077,MATH150,College Algebra,Graphing,91,Strong
+STU078,CS101,Introduction to Python,Variables,98,Strong
+STU078,CS101,Introduction to Python,Data Types,74,Developing
+STU078,CS101,Introduction to Python,Loops,88,Strong
+STU078,CS101,Introduction to Python,Functions,79,Strong
+STU078,CS101,Introduction to Python,Lists,84,Strong
+STU078,CS101,Introduction to Python,Dictionaries,99,Strong
+STU078,CS101,Introduction to Python,File Handling,86,Strong
+STU078,DS201,Data Science Fundamentals,Data Cleaning,84,Strong
+STU078,DS201,Data Science Fundamentals,Pandas,67,Developing
+STU078,DS201,Data Science Fundamentals,Data Visualization,92,Strong
+STU078,DS201,Data Science Fundamentals,Statistics,91,Strong
+STU078,DS201,Data Science Fundamentals,Regression,100,Strong
+STU078,DS201,Data Science Fundamentals,Classification,80,Strong
+STU079,BUS220,Business Analytics,Excel,59,Weak
+STU079,BUS220,Business Analytics,KPIs,59,Weak
+STU079,BUS220,Business Analytics,Descriptive Statistics,75,Strong
+STU079,BUS220,Business Analytics,Forecasting,55,Weak
+STU079,BUS220,Business Analytics,Dashboards,60,Developing
+STU079,BUS220,Business Analytics,Decision Making,64,Developing
+STU079,MATH150,College Algebra,Linear Equations,96,Strong
+STU079,MATH150,College Algebra,Functions,88,Strong
+STU079,MATH150,College Algebra,Polynomials,96,Strong
+STU079,MATH150,College Algebra,Exponents,100,Strong
+STU079,MATH150,College Algebra,Quadratic Equations,81,Strong
+STU079,MATH150,College Algebra,Graphing,95,Strong
+STU080,BUS220,Business Analytics,Excel,40,Weak
+STU080,BUS220,Business Analytics,KPIs,63,Developing
+STU080,BUS220,Business Analytics,Descriptive Statistics,30,Weak
+STU080,BUS220,Business Analytics,Forecasting,42,Weak
+STU080,BUS220,Business Analytics,Dashboards,53,Weak
+STU080,BUS220,Business Analytics,Decision Making,67,Developing
+STU081,DS201,Data Science Fundamentals,Data Cleaning,80,Strong
+STU081,DS201,Data Science Fundamentals,Pandas,74,Developing
+STU081,DS201,Data Science Fundamentals,Data Visualization,100,Strong
+STU081,DS201,Data Science Fundamentals,Statistics,63,Developing
+STU081,DS201,Data Science Fundamentals,Regression,54,Weak
+STU081,DS201,Data Science Fundamentals,Classification,86,Strong
+STU081,BUS220,Business Analytics,Excel,93,Strong
+STU081,BUS220,Business Analytics,KPIs,87,Strong
+STU081,BUS220,Business Analytics,Descriptive Statistics,100,Strong
+STU081,BUS220,Business Analytics,Forecasting,100,Strong
+STU081,BUS220,Business Analytics,Dashboards,93,Strong
+STU081,BUS220,Business Analytics,Decision Making,84,Strong
+STU082,MATH150,College Algebra,Linear Equations,66,Developing
+STU082,MATH150,College Algebra,Functions,63,Developing
+STU082,MATH150,College Algebra,Polynomials,54,Weak
+STU082,MATH150,College Algebra,Exponents,78,Strong
+STU082,MATH150,College Algebra,Quadratic Equations,43,Weak
+STU082,MATH150,College Algebra,Graphing,37,Weak
+STU082,BUS220,Business Analytics,Excel,53,Weak
+STU082,BUS220,Business Analytics,KPIs,61,Developing
+STU082,BUS220,Business Analytics,Descriptive Statistics,64,Developing
+STU082,BUS220,Business Analytics,Forecasting,59,Weak
+STU082,BUS220,Business Analytics,Dashboards,66,Developing
+STU082,BUS220,Business Analytics,Decision Making,46,Weak
+STU083,DS201,Data Science Fundamentals,Data Cleaning,90,Strong
+STU083,DS201,Data Science Fundamentals,Pandas,72,Developing
+STU083,DS201,Data Science Fundamentals,Data Visualization,86,Strong
+STU083,DS201,Data Science Fundamentals,Statistics,77,Strong
+STU083,DS201,Data Science Fundamentals,Regression,78,Strong
+STU083,DS201,Data Science Fundamentals,Classification,79,Strong
+STU084,BUS220,Business Analytics,Excel,68,Developing
+STU084,BUS220,Business Analytics,KPIs,70,Developing
+STU084,BUS220,Business Analytics,Descriptive Statistics,78,Strong
+STU084,BUS220,Business Analytics,Forecasting,65,Developing
+STU084,BUS220,Business Analytics,Dashboards,71,Developing
+STU084,BUS220,Business Analytics,Decision Making,61,Developing
+STU084,MATH150,College Algebra,Linear Equations,64,Developing
+STU084,MATH150,College Algebra,Functions,38,Weak
+STU084,MATH150,College Algebra,Polynomials,68,Developing
+STU084,MATH150,College Algebra,Exponents,46,Weak
+STU084,MATH150,College Algebra,Quadratic Equations,30,Weak
+STU084,MATH150,College Algebra,Graphing,48,Weak
+STU085,DS201,Data Science Fundamentals,Data Cleaning,64,Developing
+STU085,DS201,Data Science Fundamentals,Pandas,83,Strong
+STU085,DS201,Data Science Fundamentals,Data Visualization,65,Developing
+STU085,DS201,Data Science Fundamentals,Statistics,67,Developing
+STU085,DS201,Data Science Fundamentals,Regression,50,Weak
+STU085,DS201,Data Science Fundamentals,Classification,67,Developing
+STU085,MATH150,College Algebra,Linear Equations,30,Weak
+STU085,MATH150,College Algebra,Functions,35,Weak
+STU085,MATH150,College Algebra,Polynomials,64,Developing
+STU085,MATH150,College Algebra,Exponents,64,Developing
+STU085,MATH150,College Algebra,Quadratic Equations,60,Developing
+STU085,MATH150,College Algebra,Graphing,43,Weak
+STU086,CS101,Introduction to Python,Variables,78,Strong
+STU086,CS101,Introduction to Python,Data Types,78,Strong
+STU086,CS101,Introduction to Python,Loops,65,Developing
+STU086,CS101,Introduction to Python,Functions,97,Strong
+STU086,CS101,Introduction to Python,Lists,89,Strong
+STU086,CS101,Introduction to Python,Dictionaries,76,Strong
+STU086,CS101,Introduction to Python,File Handling,79,Strong
+STU087,DS201,Data Science Fundamentals,Data Cleaning,59,Weak
+STU087,DS201,Data Science Fundamentals,Pandas,32,Weak
+STU087,DS201,Data Science Fundamentals,Data Visualization,54,Weak
+STU087,DS201,Data Science Fundamentals,Statistics,48,Weak
+STU087,DS201,Data Science Fundamentals,Regression,44,Weak
+STU087,DS201,Data Science Fundamentals,Classification,53,Weak
+STU088,CS101,Introduction to Python,Variables,100,Strong
+STU088,CS101,Introduction to Python,Data Types,100,Strong
+STU088,CS101,Introduction to Python,Loops,89,Strong
+STU088,CS101,Introduction to Python,Functions,100,Strong
+STU088,CS101,Introduction to Python,Lists,100,Strong
+STU088,CS101,Introduction to Python,Dictionaries,100,Strong
+STU088,CS101,Introduction to Python,File Handling,96,Strong
+STU088,BUS220,Business Analytics,Excel,51,Weak
+STU088,BUS220,Business Analytics,KPIs,67,Developing
+STU088,BUS220,Business Analytics,Descriptive Statistics,63,Developing
+STU088,BUS220,Business Analytics,Forecasting,69,Developing
+STU088,BUS220,Business Analytics,Dashboards,66,Developing
+STU088,BUS220,Business Analytics,Decision Making,71,Developing
+STU089,BUS220,Business Analytics,Excel,59,Weak
+STU089,BUS220,Business Analytics,KPIs,81,Strong
+STU089,BUS220,Business Analytics,Descriptive Statistics,68,Developing
+STU089,BUS220,Business Analytics,Forecasting,90,Strong
+STU089,BUS220,Business Analytics,Dashboards,57,Weak
+STU089,BUS220,Business Analytics,Decision Making,86,Strong
+STU090,BUS220,Business Analytics,Excel,87,Strong
+STU090,BUS220,Business Analytics,KPIs,77,Strong
+STU090,BUS220,Business Analytics,Descriptive Statistics,79,Strong
+STU090,BUS220,Business Analytics,Forecasting,81,Strong
+STU090,BUS220,Business Analytics,Dashboards,90,Strong
+STU090,BUS220,Business Analytics,Decision Making,91,Strong
+STU091,BUS220,Business Analytics,Excel,45,Weak
+STU091,BUS220,Business Analytics,KPIs,51,Weak
+STU091,BUS220,Business Analytics,Descriptive Statistics,77,Strong
+STU091,BUS220,Business Analytics,Forecasting,72,Developing
+STU091,BUS220,Business Analytics,Dashboards,57,Weak
+STU091,BUS220,Business Analytics,Decision Making,52,Weak
+STU091,DS201,Data Science Fundamentals,Data Cleaning,76,Strong
+STU091,DS201,Data Science Fundamentals,Pandas,82,Strong
+STU091,DS201,Data Science Fundamentals,Data Visualization,62,Developing
+STU091,DS201,Data Science Fundamentals,Statistics,71,Developing
+STU091,DS201,Data Science Fundamentals,Regression,54,Weak
+STU091,DS201,Data Science Fundamentals,Classification,79,Strong
+STU092,MATH150,College Algebra,Linear Equations,99,Strong
+STU092,MATH150,College Algebra,Functions,86,Strong
+STU092,MATH150,College Algebra,Polynomials,100,Strong
+STU092,MATH150,College Algebra,Exponents,77,Strong
+STU092,MATH150,College Algebra,Quadratic Equations,74,Developing
+STU092,MATH150,College Algebra,Graphing,94,Strong
+STU092,DS201,Data Science Fundamentals,Data Cleaning,58,Weak
+STU092,DS201,Data Science Fundamentals,Pandas,66,Developing
+STU092,DS201,Data Science Fundamentals,Data Visualization,40,Weak
+STU092,DS201,Data Science Fundamentals,Statistics,58,Weak
+STU092,DS201,Data Science Fundamentals,Regression,45,Weak
+STU092,DS201,Data Science Fundamentals,Classification,43,Weak
+STU093,BUS220,Business Analytics,Excel,84,Strong
+STU093,BUS220,Business Analytics,KPIs,81,Strong
+STU093,BUS220,Business Analytics,Descriptive Statistics,55,Weak
+STU093,BUS220,Business Analytics,Forecasting,91,Strong
+STU093,BUS220,Business Analytics,Dashboards,90,Strong
+STU093,BUS220,Business Analytics,Decision Making,66,Developing
+STU093,DS201,Data Science Fundamentals,Data Cleaning,80,Strong
+STU093,DS201,Data Science Fundamentals,Pandas,81,Strong
+STU093,DS201,Data Science Fundamentals,Data Visualization,79,Strong
+STU093,DS201,Data Science Fundamentals,Statistics,69,Developing
+STU093,DS201,Data Science Fundamentals,Regression,67,Developing
+STU093,DS201,Data Science Fundamentals,Classification,75,Strong
+STU094,MATH150,College Algebra,Linear Equations,98,Strong
+STU094,MATH150,College Algebra,Functions,90,Strong
+STU094,MATH150,College Algebra,Polynomials,79,Strong
+STU094,MATH150,College Algebra,Exponents,93,Strong
+STU094,MATH150,College Algebra,Quadratic Equations,49,Weak
+STU094,MATH150,College Algebra,Graphing,97,Strong
+STU095,CS101,Introduction to Python,Variables,31,Weak
+STU095,CS101,Introduction to Python,Data Types,47,Weak
+STU095,CS101,Introduction to Python,Loops,38,Weak
+STU095,CS101,Introduction to Python,Functions,36,Weak
+STU095,CS101,Introduction to Python,Lists,65,Developing
+STU095,CS101,Introduction to Python,Dictionaries,46,Weak
+STU095,CS101,Introduction to Python,File Handling,56,Weak
+STU096,CS101,Introduction to Python,Variables,49,Weak
+STU096,CS101,Introduction to Python,Data Types,55,Weak
+STU096,CS101,Introduction to Python,Loops,50,Weak
+STU096,CS101,Introduction to Python,Functions,34,Weak
+STU096,CS101,Introduction to Python,Lists,61,Developing
+STU096,CS101,Introduction to Python,Dictionaries,44,Weak
+STU096,CS101,Introduction to Python,File Handling,31,Weak
+STU097,BUS220,Business Analytics,Excel,74,Developing
+STU097,BUS220,Business Analytics,KPIs,98,Strong
+STU097,BUS220,Business Analytics,Descriptive Statistics,90,Strong
+STU097,BUS220,Business Analytics,Forecasting,75,Strong
+STU097,BUS220,Business Analytics,Dashboards,75,Strong
+STU097,BUS220,Business Analytics,Decision Making,76,Strong
+STU097,MATH150,College Algebra,Linear Equations,100,Strong
+STU097,MATH150,College Algebra,Functions,80,Strong
+STU097,MATH150,College Algebra,Polynomials,81,Strong
+STU097,MATH150,College Algebra,Exponents,88,Strong
+STU097,MATH150,College Algebra,Quadratic Equations,78,Strong
+STU097,MATH150,College Algebra,Graphing,72,Developing
+STU098,BUS220,Business Analytics,Excel,73,Developing
+STU098,BUS220,Business Analytics,KPIs,75,Strong
+STU098,BUS220,Business Analytics,Descriptive Statistics,75,Strong
+STU098,BUS220,Business Analytics,Forecasting,84,Strong
+STU098,BUS220,Business Analytics,Dashboards,76,Strong
+STU098,BUS220,Business Analytics,Decision Making,84,Strong
+STU099,CS101,Introduction to Python,Variables,76,Strong
+STU099,CS101,Introduction to Python,Data Types,77,Strong
+STU099,CS101,Introduction to Python,Loops,53,Weak
+STU099,CS101,Introduction to Python,Functions,87,Strong
+STU099,CS101,Introduction to Python,Lists,81,Strong
+STU099,CS101,Introduction to Python,Dictionaries,88,Strong
+STU099,CS101,Introduction to Python,File Handling,42,Weak
+STU099,BUS220,Business Analytics,Excel,86,Strong
+STU099,BUS220,Business Analytics,KPIs,59,Weak
+STU099,BUS220,Business Analytics,Descriptive Statistics,74,Developing
+STU099,BUS220,Business Analytics,Forecasting,48,Weak
+STU099,BUS220,Business Analytics,Dashboards,68,Developing
+STU099,BUS220,Business Analytics,Decision Making,48,Weak
+STU100,CS101,Introduction to Python,Variables,67,Developing
+STU100,CS101,Introduction to Python,Data Types,97,Strong
+STU100,CS101,Introduction to Python,Loops,72,Developing
+STU100,CS101,Introduction to Python,Functions,77,Strong
+STU100,CS101,Introduction to Python,Lists,85,Strong
+STU100,CS101,Introduction to Python,Dictionaries,80,Strong
+STU100,CS101,Introduction to Python,File Handling,76,Strong
+STU100,DS201,Data Science Fundamentals,Data Cleaning,80,Strong
+STU100,DS201,Data Science Fundamentals,Pandas,100,Strong
+STU100,DS201,Data Science Fundamentals,Data Visualization,75,Strong
+STU100,DS201,Data Science Fundamentals,Statistics,78,Strong
+STU100,DS201,Data Science Fundamentals,Regression,88,Strong
+STU100,DS201,Data Science Fundamentals,Classification,89,Strong

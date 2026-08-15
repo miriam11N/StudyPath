@@ -1,0 +1,6 @@
+Course: Business Analytics
+
+Excel supports spreadsheet analysis using formulas, pivot tables, and charts. KPIs are
+measurable values used to track business performance. Descriptive statistics summarize
+data. Forecasting estimates future outcomes using historical patterns. Dashboards combine
+KPIs and charts to support decision making.

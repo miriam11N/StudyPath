@@ -1,0 +1,6 @@
+Course: Introduction to Python
+
+Variables store values in Python. Common data types include integers, floats,
+strings, booleans, lists, and dictionaries. Loops repeat tasks using for or while.
+Functions group reusable code into named blocks. Lists store ordered collections,
+while dictionaries store key-value pairs. File handling uses open(), read(), and write().
