@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from chatbot import get_ai_response
 
 st.set_page_config(
     page_title="StudyPath",
@@ -30,10 +31,12 @@ for note_file in KNOWLEDGE_DIR.glob("*.txt"):
 
         if len(sentence) > 25:
             note_documents.append(sentence)
-            note_metadata.append({
-                "source_file": note_file.name,
-                "text": sentence
-            })
+            note_metadata.append(
+                {
+                    "source_file": note_file.name,
+                    "text": sentence
+                }
+            )
 
 vectorizer = TfidfVectorizer(stop_words="english")
 note_matrix = vectorizer.fit_transform(note_documents)
@@ -57,18 +60,36 @@ def search_course_notes(query, course_id=None, top_k=3):
     ).head(top_k)
 
 
+def get_course_context(query, course_id):
+    note_results = search_course_notes(
+        query=query,
+        course_id=course_id,
+        top_k=3
+    )
+
+    if note_results.empty:
+        return "No matching course notes were found."
+
+    return "\n\n".join(
+        f"Source: {row['source_file']}\n{row['text']}"
+        for _, row in note_results.iterrows()
+    )
+
+
 def create_study_plan(student_id, course_id):
     enrollment = enrollments[
-        (enrollments["student_id"] == student_id) &
-        (enrollments["course_id"] == course_id)
+        (enrollments["student_id"] == student_id)
+        & (enrollments["course_id"] == course_id)
     ].iloc[0]
 
     student_topics = topic_scores[
-        (topic_scores["student_id"] == student_id) &
-        (topic_scores["course_id"] == course_id)
+        (topic_scores["student_id"] == student_id)
+        & (topic_scores["course_id"] == course_id)
     ].sort_values("topic_quiz_score")
 
-    weak_topics = student_topics[student_topics["topic_quiz_score"] < 75]
+    weak_topics = student_topics[
+        student_topics["topic_quiz_score"] < 75
+    ]
 
     if weak_topics.empty:
         weak_topics = student_topics.head(3)
@@ -84,19 +105,21 @@ def create_study_plan(student_id, course_id):
     for index, (_, topic_row) in enumerate(weak_topics.iterrows()):
         sessions = max(1, sessions_per_week // len(weak_topics))
 
-        plan.append({
-            "Priority": index + 1,
-            "Topic": topic_row["topic"],
-            "Topic Score": topic_row["topic_quiz_score"],
-            "Mastery Level": topic_row["mastery_level"],
-            "Sessions This Week": sessions,
-            "Session Minutes": enrollment["preferred_session_minutes"],
-            "Recommended Activity": (
-                "Review course notes and complete practice questions"
-                if topic_row["topic_quiz_score"] < 60
-                else "Practice problems and self-quiz"
-            )
-        })
+        plan.append(
+            {
+                "Priority": index + 1,
+                "Topic": topic_row["topic"],
+                "Topic Score": topic_row["topic_quiz_score"],
+                "Mastery Level": topic_row["mastery_level"],
+                "Sessions This Week": sessions,
+                "Session Minutes": enrollment["preferred_session_minutes"],
+                "Recommended Activity": (
+                    "Review course notes and complete practice questions"
+                    if topic_row["topic_quiz_score"] < 60
+                    else "Practice problems and self-quiz"
+                )
+            }
+        )
 
     return pd.DataFrame(plan)
 
@@ -108,7 +131,10 @@ def generate_practice_quiz(student_id, course_id, topic):
         top_k=1
     )
 
-    context = note_results.iloc[0]["text"]
+    if note_results.empty:
+        context = "No course note was found for this topic."
+    else:
+        context = note_results.iloc[0]["text"]
 
     questions = [
         f"In your own words, explain the main idea of {topic}.",
@@ -121,10 +147,20 @@ def generate_practice_quiz(student_id, course_id, topic):
 
 def get_risk_message(score, missed_sessions):
     if score < 60 or missed_sessions >= 3:
-        return "High Risk — prioritize weak topics and add extra practice sessions."
+        return (
+            "High Risk — prioritize weak topics and add extra practice sessions."
+        )
+
     if score < 75 or missed_sessions >= 1:
-        return "Needs Support — follow the personalized plan and complete regular self-quizzes."
-    return "On Track — continue reviewing and keep at least one session for each topic."
+        return (
+            "Needs Support — follow the personalized plan and complete "
+            "regular self-quizzes."
+        )
+
+    return (
+        "On Track — continue reviewing and keep at least one session "
+        "for each topic."
+    )
 
 
 st.title("StudyPath")
@@ -133,15 +169,20 @@ st.caption(
     "builds practice quizzes, and adapts recommendations when a student struggles."
 )
 
-tab1, tab2, tab3 = st.tabs([
-    "My Study Plan",
-    "Practice Quiz",
-    "Dashboard"
-])
+tab1, tab2, tab3, tab4 = st.tabs(
+    [
+        "My Study Plan",
+        "Practice Quiz",
+        "Dashboard",
+        "StudyPath Assistant"
+    ]
+)
 
 student_options = students[["student_id", "student_name"]].copy()
 student_options["label"] = (
-    student_options["student_id"] + " — " + student_options["student_name"]
+    student_options["student_id"]
+    + " — "
+    + student_options["student_name"]
 )
 
 with st.sidebar:
@@ -159,8 +200,9 @@ with st.sidebar:
     ][["course_id", "course_name"]].drop_duplicates()
 
     available_courses["label"] = (
-        available_courses["course_id"] + " — " +
-        available_courses["course_name"]
+        available_courses["course_id"]
+        + " — "
+        + available_courses["course_name"]
     )
 
     selected_course_label = st.selectbox(
@@ -169,24 +211,58 @@ with st.sidebar:
     )
 
     selected_course_id = selected_course_label.split(" — ")[0]
+    selected_course_name = selected_course_label.split(" — ", 1)[1]
 
     st.divider()
     st.caption("StudyPath uses synthetic student data for demonstration only.")
 
 selected_enrollment = enrollments[
-    (enrollments["student_id"] == selected_student_id) &
-    (enrollments["course_id"] == selected_course_id)
+    (enrollments["student_id"] == selected_student_id)
+    & (enrollments["course_id"] == selected_course_id)
 ].iloc[0]
+
+current_plan = create_study_plan(
+    selected_student_id,
+    selected_course_id
+)
+
+weakest_topic = current_plan.iloc[0]["Topic"]
+weakest_score = current_plan.iloc[0]["Topic Score"]
+
+student_context = f"""
+Student ID: {selected_student_id}
+Selected course: {selected_course_name}
+Latest quiz score: {selected_enrollment['latest_quiz_score']}%
+Exam in: {selected_enrollment['exam_days_away']} days
+Weekly available study time: {selected_enrollment['weekly_study_hours']} hours
+Preferred session length: {selected_enrollment['preferred_session_minutes']} minutes
+Missed sessions: {selected_enrollment['missed_sessions']}
+Risk level: {selected_enrollment['risk_level']}
+Weakest topic: {weakest_topic}
+Weakest topic score: {weakest_score}%
+"""
 
 with tab1:
     st.header("Personalized Study Plan")
 
     col1, col2, col3, col4 = st.columns(4)
 
-    col1.metric("Latest Quiz Score", f"{selected_enrollment['latest_quiz_score']}%")
-    col2.metric("Exam in", f"{selected_enrollment['exam_days_away']} days")
-    col3.metric("Weekly Study Time", f"{selected_enrollment['weekly_study_hours']} hrs")
-    col4.metric("Missed Sessions", selected_enrollment["missed_sessions"])
+    col1.metric(
+        "Latest Quiz Score",
+        f"{selected_enrollment['latest_quiz_score']}%"
+    )
+    col2.metric(
+        "Exam in",
+        f"{selected_enrollment['exam_days_away']} days"
+    )
+    col3.metric(
+        "Weekly Study Time",
+        f"{selected_enrollment['weekly_study_hours']} hrs"
+    )
+    col4.metric(
+        "Missed Sessions",
+        selected_enrollment["missed_sessions"]
+    )
 
     st.info(
         get_risk_message(
@@ -195,15 +271,14 @@ with tab1:
         )
     )
 
-    plan = create_study_plan(selected_student_id, selected_course_id)
-
     st.subheader("This Week's Focus")
-    st.dataframe(plan, use_container_width=True, hide_index=True)
+    st.dataframe(
+        current_plan,
+        width="stretch",
+        hide_index=True
+    )
 
     st.subheader("Agent Recommendation")
-
-    weakest_topic = plan.iloc[0]["Topic"]
-    weakest_score = plan.iloc[0]["Topic Score"]
 
     if weakest_score < 60:
         st.warning(
@@ -220,8 +295,7 @@ with tab1:
 with tab2:
     st.header("Practice Quiz")
 
-    plan = create_study_plan(selected_student_id, selected_course_id)
-    topic_list = plan["Topic"].tolist()
+    topic_list = current_plan["Topic"].tolist()
 
     selected_topic = st.selectbox(
         "Choose a topic to practice",
@@ -265,23 +339,28 @@ with tab3:
     )
 
     st.subheader("Student Risk Distribution")
+
     risk_counts = (
         enrollments["risk_level"]
         .value_counts()
         .reset_index()
     )
     risk_counts.columns = ["Risk Level", "Students"]
+
     st.bar_chart(risk_counts.set_index("Risk Level"))
 
     st.subheader("Average Quiz Score by Course")
+
     average_scores = (
         enrollments.groupby("course_name")["latest_quiz_score"]
         .mean()
         .sort_values()
     )
+
     st.bar_chart(average_scores)
 
     st.subheader("Students Who Need Attention")
+
     attention_students = enrollments[
         enrollments["risk_level"] != "On Track"
     ].sort_values("latest_quiz_score")
@@ -296,11 +375,12 @@ with tab3:
                 "risk_level"
             ]
         ],
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
 
     st.subheader("Topic Performance")
+
     topic_performance = (
         topic_scores.groupby(["course_name", "topic"])["topic_quiz_score"]
         .mean()
@@ -310,6 +390,100 @@ with tab3:
 
     st.dataframe(
         topic_performance,
-        use_container_width=True,
+        width="stretch",
         hide_index=True
     )
+
+with tab4:
+    st.header("StudyPath Assistant")
+    st.caption(
+        "Ask for help understanding a concept, creating practice questions, "
+        "or deciding what to study next."
+    )
+
+    if "chat_messages" not in st.session_state:
+        st.session_state.chat_messages = []
+
+    action_col1, action_col2, action_col3 = st.columns(3)
+
+    with action_col1:
+        if st.button("Explain my weak topic"):
+            st.session_state.pending_prompt = (
+                f"Explain my weakest topic, {weakest_topic}, in simple words. "
+                "Give one short example and one practice activity."
+            )
+
+    with action_col2:
+        if st.button("Make a practice quiz"):
+            st.session_state.pending_prompt = (
+                f"Create five original practice questions about {weakest_topic}. "
+                "Do not provide answers until I ask."
+            )
+
+    with action_col3:
+        if st.button("Update my study plan"):
+            st.session_state.pending_prompt = (
+                "Review my student data and give me a realistic study plan "
+                "for the next seven days."
+            )
+
+    for message in st.session_state.chat_messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    typed_prompt = st.chat_input(
+        "Example: I have 30 minutes today. What should I study first?"
+    )
+
+    pending_prompt = st.session_state.pop("pending_prompt", None)
+    prompt = pending_prompt or typed_prompt
+
+    if prompt:
+        st.session_state.chat_messages.append(
+            {
+                "role": "user",
+                "content": prompt
+            }
+        )
+
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            with st.spinner("StudyPath is thinking..."):
+                try:
+                    course_context = get_course_context(
+                        query=prompt,
+                        course_id=selected_course_id
+                    )
+
+                    response = get_ai_response(
+                        user_message=prompt,
+                        course_name=selected_course_name,
+                        course_context=course_context,
+                        student_context=student_context,
+                        chat_history=st.session_state.chat_messages[:-1]
+                    )
+
+                    st.markdown(response)
+
+                    with st.expander("Course notes used"):
+                        st.write(course_context)
+
+                    st.session_state.chat_messages.append(
+                        {
+                            "role": "assistant",
+                            "content": response
+                        }
+                    )
+
+                except Exception as error:
+                    st.error(
+                        "The assistant could not respond. Confirm that your "
+                        "OPENAI_API_KEY is correct and that you have internet access."
+                    )
+                    st.code(str(error))
+
+    if st.button("Clear conversation"):
+        st.session_state.chat_messages = []
+        st.rerun()
