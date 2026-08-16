@@ -70,3 +70,41 @@ Current student message:
     )
 
     return response.output_text
+
+def grade_quiz_answer(question, student_answer, course_context):
+    prompt = f"""
+You are grading a practice answer for StudyPath.
+
+Course-note context:
+{course_context}
+
+Question:
+{question}
+
+Student answer:
+{student_answer}
+
+Give supportive, concise feedback for a student.
+
+Return your response exactly in this format:
+
+Score: X/2
+Feedback: Your feedback here.
+Suggested answer: A short example of a stronger answer.
+
+Rules:
+- Score from 0 to 2 only.
+- Give 2 for a correct, clear answer.
+- Give 1 for a partially correct answer.
+- Give 0 for an incorrect, blank, or unrelated answer.
+- Do not pretend this is an official grade.
+- Use simple language.
+"""
+
+    response = client.responses.create(
+        model="gpt-4o-mini",
+        instructions=SYSTEM_PROMPT,
+        input=prompt
+    )
+
+    return response.output_text
