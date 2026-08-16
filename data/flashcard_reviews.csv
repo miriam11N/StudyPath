@@ -1,0 +1,7 @@
+review_id,student_id,course_id,course_name,topic,card_question,rating,reviewed_at
+STU001_BUS220_20260816164511521457,STU001,BUS220,Business Analytics,Forecasting,What does forecasting estimate?,Hard,2026-08-16 16:45:11
+STU001_BUS220_20260816164516647716,STU001,BUS220,Business Analytics,Forecasting,What is the primary function of Excel in business analytics?,Good,2026-08-16 16:45:16
+STU001_BUS220_20260816164519997346,STU001,BUS220,Business Analytics,Forecasting,What are KPIs?,Hard,2026-08-16 16:45:19
+STU001_BUS220_20260816164522947175,STU001,BUS220,Business Analytics,Forecasting,How do historical patterns aid forecasting?,Again,2026-08-16 16:45:22
+STU001_BUS220_20260816164526304840,STU001,BUS220,Business Analytics,Forecasting,What tools can enhance forecasting in Excel?,Easy,2026-08-16 16:45:26
+STU001_BUS220_20260816164529550338,STU001,BUS220,Business Analytics,Forecasting,Why are KPIs important in forecasting?,Hard,2026-08-16 16:45:29

@@ -4,7 +4,11 @@ from pathlib import Path
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from chatbot import get_ai_response, grade_quiz_answer
+from chatbot import (
+    get_ai_response,
+    grade_quiz_answer,
+    generate_flashcards
+)
 
 st.set_page_config(
     page_title="StudyPath",
@@ -16,6 +20,7 @@ BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 KNOWLEDGE_DIR = BASE_DIR / "knowledge_base"
 QUIZ_ATTEMPTS_FILE = DATA_DIR / "quiz_attempts.csv"
+FLASHCARD_REVIEWS_FILE = DATA_DIR / "flashcard_reviews.csv"
 
 courses = pd.read_csv(DATA_DIR / "courses.csv")
 students = pd.read_csv(DATA_DIR / "students.csv")
@@ -97,7 +102,7 @@ def load_quiz_attempts():
 
     try:
         attempts = pd.read_csv(QUIZ_ATTEMPTS_FILE)
-    except pd.errors.EmptyDataError:
+    except (pd.errors.EmptyDataError, pd.errors.ParserError):
         return pd.DataFrame(columns=expected_columns)
 
     if not set(expected_columns).issubset(attempts.columns):
@@ -152,6 +157,84 @@ def save_quiz_attempt(
 
     attempt.to_csv(
         QUIZ_ATTEMPTS_FILE,
+        mode="a",
+        header=write_header,
+        index=False
+    )
+
+
+def load_flashcard_reviews():
+    expected_columns = [
+        "review_id",
+        "student_id",
+        "course_id",
+        "course_name",
+        "topic",
+        "card_question",
+        "rating",
+        "reviewed_at"
+    ]
+
+    if (
+        not FLASHCARD_REVIEWS_FILE.exists()
+        or FLASHCARD_REVIEWS_FILE.stat().st_size == 0
+    ):
+        return pd.DataFrame(columns=expected_columns)
+
+    try:
+        reviews = pd.read_csv(FLASHCARD_REVIEWS_FILE)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError):
+        return pd.DataFrame(columns=expected_columns)
+
+    if not set(expected_columns).issubset(reviews.columns):
+        return pd.DataFrame(columns=expected_columns)
+
+    if reviews.empty:
+        return pd.DataFrame(columns=expected_columns)
+
+    reviews["reviewed_at"] = pd.to_datetime(
+        reviews["reviewed_at"],
+        errors="coerce"
+    )
+
+    return reviews
+
+
+def save_flashcard_review(
+    student_id,
+    course_id,
+    course_name,
+    topic,
+    card_question,
+    rating
+):
+    timestamp = datetime.now()
+
+    review = pd.DataFrame(
+        [
+            {
+                "review_id": (
+                    f"{student_id}_{course_id}_"
+                    f"{timestamp.strftime('%Y%m%d%H%M%S%f')}"
+                ),
+                "student_id": student_id,
+                "course_id": course_id,
+                "course_name": course_name,
+                "topic": topic,
+                "card_question": card_question,
+                "rating": rating,
+                "reviewed_at": timestamp.strftime("%Y-%m-%d %H:%M:%S")
+            }
+        ]
+    )
+
+    write_header = (
+        not FLASHCARD_REVIEWS_FILE.exists()
+        or FLASHCARD_REVIEWS_FILE.stat().st_size == 0
+    )
+
+    review.to_csv(
+        FLASHCARD_REVIEWS_FILE,
         mode="a",
         header=write_header,
         index=False
@@ -264,31 +347,25 @@ def apply_quiz_adaptation(plan, quiz_score, topic):
 
 def get_quiz_adaptation(quiz_score, topic):
     if quiz_score < 60:
-        return {
-            "message": (
-                f"Your latest practice score for {topic} was {quiz_score}%. "
-                f"StudyPath added an extra review session for {topic}. "
-                "Review the course notes, correct difficult answers, "
-                "and retake a practice quiz."
-            )
-        }
+        return (
+            f"Your latest practice score for {topic} was {quiz_score}%. "
+            f"StudyPath added an extra review session for {topic}. "
+            "Review the course notes, correct difficult answers, "
+            "and retake a practice quiz."
+        )
 
     if quiz_score < 80:
-        return {
-            "message": (
-                f"Your latest practice score for {topic} was {quiz_score}%. "
-                "You are making progress. Keep your current plan and complete "
-                "one more self-quiz before the exam."
-            )
-        }
-
-    return {
-        "message": (
+        return (
             f"Your latest practice score for {topic} was {quiz_score}%. "
-            f"You are doing well with {topic}. Keep one short review session, "
-            "then move more study time to your next weakest topic."
+            "You are making progress. Keep your current plan and complete "
+            "one more self-quiz before the exam."
         )
-    }
+
+    return (
+        f"Your latest practice score for {topic} was {quiz_score}%. "
+        f"You are doing well with {topic}. Keep one short review session, "
+        "then move more study time to your next weakest topic."
+    )
 
 
 def generate_practice_quiz(student_id, course_id, topic):
@@ -333,14 +410,15 @@ def get_risk_message(score, missed_sessions):
 st.title("StudyPath")
 st.caption(
     "An AI-powered academic coach that creates study plans, finds weak topics, "
-    "builds practice quizzes, tracks progress, and adapts recommendations "
-    "when a student struggles."
+    "builds practice quizzes, flashcards, tracks progress, and adapts "
+    "recommendations when a student struggles."
 )
 
-tab1, tab2, tab3, tab4 = st.tabs(
+tab1, tab2, tab3, tab4, tab5 = st.tabs(
     [
         "My Study Plan",
         "Practice Quiz",
+        "Flashcards",
         "Dashboard",
         "StudyPath Assistant"
     ]
@@ -470,17 +548,17 @@ with tab1:
     )
 
     if adaptation_score is not None and adaptation_topic:
-        adaptation = get_quiz_adaptation(
+        adaptation_message = get_quiz_adaptation(
             quiz_score=adaptation_score,
             topic=adaptation_topic
         )
 
         if adaptation_score < 60:
-            st.warning(adaptation["message"])
+            st.warning(adaptation_message)
         elif adaptation_score < 80:
-            st.info(adaptation["message"])
+            st.info(adaptation_message)
         else:
-            st.success(adaptation["message"])
+            st.success(adaptation_message)
 
     st.subheader("This Week's Focus")
     st.dataframe(
@@ -678,6 +756,124 @@ with tab2:
             st.rerun()
 
 with tab3:
+    st.header("Study Flashcards")
+    st.caption(
+        "Generate course-aware flashcards, reveal each answer, and rate "
+        "how well you know the material."
+    )
+
+    flashcard_topic = st.selectbox(
+        "Choose a topic",
+        base_plan["Topic"].tolist(),
+        key="flashcard_topic_selector"
+    )
+
+    if "flashcards" not in st.session_state:
+        st.session_state.flashcards = []
+
+    if "flashcard_index" not in st.session_state:
+        st.session_state.flashcard_index = 0
+
+    if "flashcard_answer_visible" not in st.session_state:
+        st.session_state.flashcard_answer_visible = False
+
+    if "flashcard_topic" not in st.session_state:
+        st.session_state.flashcard_topic = None
+
+    if st.button("Generate Flashcards", key="generate_flashcards"):
+        with st.spinner("Creating flashcards from course notes..."):
+            try:
+                context = get_course_context(
+                    query=flashcard_topic,
+                    course_id=selected_course_id
+                )
+
+                cards = generate_flashcards(
+                    topic=flashcard_topic,
+                    course_context=context,
+                    number_of_cards=6
+                )
+
+                if not isinstance(cards, list) or not cards:
+                    raise ValueError(
+                        "The assistant did not return a valid flashcard list."
+                    )
+
+                st.session_state.flashcards = cards
+                st.session_state.flashcard_index = 0
+                st.session_state.flashcard_answer_visible = False
+                st.session_state.flashcard_topic = flashcard_topic
+
+                st.rerun()
+
+            except Exception as error:
+                st.error(
+                    "Flashcards could not be created. Please try again."
+                )
+                st.code(str(error))
+
+    if st.session_state.flashcards:
+        current_index = st.session_state.flashcard_index
+        total_cards = len(st.session_state.flashcards)
+
+        if current_index >= total_cards:
+            current_index = total_cards - 1
+            st.session_state.flashcard_index = current_index
+
+        current_card = st.session_state.flashcards[current_index]
+
+        st.progress((current_index + 1) / total_cards)
+        st.caption(f"Card {current_index + 1} of {total_cards}")
+
+        st.subheader("Question")
+        st.info(current_card.get("question", "Question unavailable."))
+
+        if st.button("Show Answer", key="show_flashcard_answer"):
+            st.session_state.flashcard_answer_visible = True
+            st.rerun()
+
+        if st.session_state.flashcard_answer_visible:
+            st.subheader("Answer")
+            st.success(current_card.get("answer", "Answer unavailable."))
+
+            st.caption("How well did you know this card?")
+
+            rating_columns = st.columns(4)
+            ratings = ["Again", "Hard", "Good", "Easy"]
+
+            for column, rating in zip(rating_columns, ratings):
+                with column:
+                    if st.button(
+                        rating,
+                        key=f"flashcard_rating_{rating}_{current_index}"
+                    ):
+                        save_flashcard_review(
+                            student_id=selected_student_id,
+                            course_id=selected_course_id,
+                            course_name=selected_course_name,
+                            topic=st.session_state.flashcard_topic,
+                            card_question=current_card.get("question", ""),
+                            rating=rating
+                        )
+
+                        if current_index < total_cards - 1:
+                            st.session_state.flashcard_index += 1
+                            st.session_state.flashcard_answer_visible = False
+                            st.rerun()
+                        else:
+                            st.success(
+                                "Flashcard session complete. Your review ratings were saved."
+                            )
+
+        if current_index == total_cards - 1:
+            if st.button("Finish Flashcards", key="finish_flashcards"):
+                st.session_state.flashcards = []
+                st.session_state.flashcard_index = 0
+                st.session_state.flashcard_answer_visible = False
+                st.session_state.flashcard_topic = None
+                st.rerun()
+
+with tab4:
     st.header("Learning Dashboard")
 
     st.subheader("My Practice Progress")
@@ -765,7 +961,77 @@ with tab3:
         )
 
     st.divider()
+    st.subheader("Flashcard Review Summary")
 
+    flashcard_reviews = load_flashcard_reviews()
+
+    student_flashcard_reviews = flashcard_reviews[
+        (flashcard_reviews["student_id"] == selected_student_id)
+        & (flashcard_reviews["course_id"] == selected_course_id)
+    ].copy()
+
+    if student_flashcard_reviews.empty:
+        st.info(
+            "No flashcard reviews yet. Rate flashcards to track recall confidence."
+        )
+    else:
+        review_col1, review_col2 = st.columns(2)
+
+        review_col1.metric(
+            "Flashcards Rated",
+            len(student_flashcard_reviews)
+        )
+
+        review_col2.metric(
+            "Needs More Review",
+            student_flashcard_reviews["rating"]
+            .isin(["Again", "Hard"])
+            .sum()
+        )
+
+        rating_counts = (
+            student_flashcard_reviews["rating"]
+            .value_counts()
+        )
+
+        st.bar_chart(rating_counts)
+
+        hard_cards = student_flashcard_reviews[
+            student_flashcard_reviews["rating"].isin(["Again", "Hard"])
+        ][
+            [
+                "topic",
+                "card_question",
+                "rating",
+                "reviewed_at"
+            ]
+        ].copy()
+
+        if not hard_cards.empty:
+            hard_cards["reviewed_at"] = (
+                pd.to_datetime(
+                    hard_cards["reviewed_at"],
+                    errors="coerce"
+                )
+                .dt.strftime("%Y-%m-%d %H:%M")
+            )
+
+            hard_cards.columns = [
+                "Topic",
+                "Flashcard",
+                "Rating",
+                "Reviewed At"
+            ]
+
+            st.subheader("Cards to Review Again")
+
+            st.dataframe(
+                hard_cards.iloc[::-1],
+                width="stretch",
+                hide_index=True
+            )
+
+    st.divider()
     st.subheader("Class Overview")
 
     col1, col2, col3, col4 = st.columns(4)
@@ -837,7 +1103,7 @@ with tab3:
         hide_index=True
     )
 
-with tab4:
+with tab5:
     st.header("StudyPath Assistant")
     st.caption(
         "Ask for help understanding a concept, creating practice questions, "
