@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
+from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from chatbot import get_ai_response, grade_quiz_answer
@@ -14,6 +15,7 @@ st.set_page_config(
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 KNOWLEDGE_DIR = BASE_DIR / "knowledge_base"
+QUIZ_ATTEMPTS_FILE = DATA_DIR / "quiz_attempts.csv"
 
 courses = pd.read_csv(DATA_DIR / "courses.csv")
 students = pd.read_csv(DATA_DIR / "students.csv")
@@ -76,6 +78,102 @@ def get_course_context(query, course_id):
     )
 
 
+def load_quiz_attempts():
+    expected_columns = [
+        "attempt_id",
+        "student_id",
+        "course_id",
+        "course_name",
+        "topic",
+        "score_percent",
+        "attempted_at"
+    ]
+
+    if (
+        not QUIZ_ATTEMPTS_FILE.exists()
+        or QUIZ_ATTEMPTS_FILE.stat().st_size == 0
+    ):
+        return pd.DataFrame(columns=expected_columns)
+
+    try:
+        attempts = pd.read_csv(QUIZ_ATTEMPTS_FILE)
+    except pd.errors.EmptyDataError:
+        return pd.DataFrame(columns=expected_columns)
+
+    if not set(expected_columns).issubset(attempts.columns):
+        return pd.DataFrame(columns=expected_columns)
+
+    if attempts.empty:
+        return pd.DataFrame(columns=expected_columns)
+
+    attempts["attempted_at"] = pd.to_datetime(
+        attempts["attempted_at"],
+        errors="coerce"
+    )
+
+    attempts["score_percent"] = pd.to_numeric(
+        attempts["score_percent"],
+        errors="coerce"
+    )
+
+    return attempts
+
+
+def save_quiz_attempt(
+    student_id,
+    course_id,
+    course_name,
+    topic,
+    score_percent
+):
+    timestamp = datetime.now()
+
+    attempt = pd.DataFrame(
+        [
+            {
+                "attempt_id": (
+                    f"{student_id}_{course_id}_"
+                    f"{timestamp.strftime('%Y%m%d%H%M%S%f')}"
+                ),
+                "student_id": student_id,
+                "course_id": course_id,
+                "course_name": course_name,
+                "topic": topic,
+                "score_percent": score_percent,
+                "attempted_at": timestamp.strftime("%Y-%m-%d %H:%M:%S")
+            }
+        ]
+    )
+
+    write_header = (
+        not QUIZ_ATTEMPTS_FILE.exists()
+        or QUIZ_ATTEMPTS_FILE.stat().st_size == 0
+    )
+
+    attempt.to_csv(
+        QUIZ_ATTEMPTS_FILE,
+        mode="a",
+        header=write_header,
+        index=False
+    )
+
+
+def get_latest_saved_attempt(student_id, course_id):
+    attempts = load_quiz_attempts()
+
+    student_attempts = attempts[
+        (attempts["student_id"] == student_id)
+        & (attempts["course_id"] == course_id)
+    ].dropna(subset=["attempted_at", "score_percent"])
+
+    if student_attempts.empty:
+        return None
+
+    return student_attempts.sort_values(
+        "attempted_at"
+    ).iloc[-1]
+
+
 def create_study_plan(student_id, course_id):
     enrollment = enrollments[
         (enrollments["student_id"] == student_id)
@@ -128,6 +226,9 @@ def apply_quiz_adaptation(plan, quiz_score, topic):
     adapted_plan = plan.copy()
     topic_mask = adapted_plan["Topic"] == topic
 
+    if not topic_mask.any():
+        return adapted_plan
+
     if quiz_score < 60:
         adapted_plan.loc[
             topic_mask,
@@ -165,9 +266,9 @@ def get_quiz_adaptation(quiz_score, topic):
     if quiz_score < 60:
         return {
             "message": (
-                f"Your practice score for {topic} was {quiz_score}%. "
+                f"Your latest practice score for {topic} was {quiz_score}%. "
                 f"StudyPath added an extra review session for {topic}. "
-                "Review the course notes, correct the difficult answers, "
+                "Review the course notes, correct difficult answers, "
                 "and retake a practice quiz."
             )
         }
@@ -175,7 +276,7 @@ def get_quiz_adaptation(quiz_score, topic):
     if quiz_score < 80:
         return {
             "message": (
-                f"Your practice score for {topic} was {quiz_score}%. "
+                f"Your latest practice score for {topic} was {quiz_score}%. "
                 "You are making progress. Keep your current plan and complete "
                 "one more self-quiz before the exam."
             )
@@ -183,7 +284,7 @@ def get_quiz_adaptation(quiz_score, topic):
 
     return {
         "message": (
-            f"Your practice score for {topic} was {quiz_score}%. "
+            f"Your latest practice score for {topic} was {quiz_score}%. "
             f"You are doing well with {topic}. Keep one short review session, "
             "then move more study time to your next weakest topic."
         )
@@ -232,7 +333,8 @@ def get_risk_message(score, missed_sessions):
 st.title("StudyPath")
 st.caption(
     "An AI-powered academic coach that creates study plans, finds weak topics, "
-    "builds practice quizzes, and adapts recommendations when a student struggles."
+    "builds practice quizzes, tracks progress, and adapts recommendations "
+    "when a student struggles."
 )
 
 tab1, tab2, tab3, tab4 = st.tabs(
@@ -292,17 +394,33 @@ base_plan = create_study_plan(
     selected_course_id
 )
 
-current_plan = base_plan.copy()
+latest_saved_attempt = get_latest_saved_attempt(
+    selected_student_id,
+    selected_course_id
+)
 
-if (
+adaptation_score = None
+adaptation_topic = None
+
+if latest_saved_attempt is not None:
+    adaptation_score = int(latest_saved_attempt["score_percent"])
+    adaptation_topic = latest_saved_attempt["topic"]
+
+elif (
     "latest_quiz_score" in st.session_state
     and "quiz_topic" in st.session_state
     and st.session_state.quiz_topic
 ):
+    adaptation_score = st.session_state.latest_quiz_score
+    adaptation_topic = st.session_state.quiz_topic
+
+current_plan = base_plan.copy()
+
+if adaptation_score is not None and adaptation_topic:
     current_plan = apply_quiz_adaptation(
         plan=base_plan,
-        quiz_score=st.session_state.latest_quiz_score,
-        topic=st.session_state.quiz_topic
+        quiz_score=adaptation_score,
+        topic=adaptation_topic
     )
 
 weakest_topic = current_plan.iloc[0]["Topic"]
@@ -311,7 +429,8 @@ weakest_score = current_plan.iloc[0]["Topic Score"]
 student_context = f"""
 Student ID: {selected_student_id}
 Selected course: {selected_course_name}
-Latest quiz score: {selected_enrollment['latest_quiz_score']}%
+Latest recorded course quiz score: {selected_enrollment['latest_quiz_score']}%
+Latest StudyPath practice score: {adaptation_score if adaptation_score is not None else "No attempt yet"}%
 Exam in: {selected_enrollment['exam_days_away']} days
 Weekly available study time: {selected_enrollment['weekly_study_hours']} hours
 Preferred session length: {selected_enrollment['preferred_session_minutes']} minutes
@@ -327,7 +446,7 @@ with tab1:
     col1, col2, col3, col4 = st.columns(4)
 
     col1.metric(
-        "Latest Quiz Score",
+        "Latest Course Quiz Score",
         f"{selected_enrollment['latest_quiz_score']}%"
     )
     col2.metric(
@@ -350,19 +469,15 @@ with tab1:
         )
     )
 
-    if (
-        "latest_quiz_score" in st.session_state
-        and "quiz_topic" in st.session_state
-        and st.session_state.quiz_topic
-    ):
+    if adaptation_score is not None and adaptation_topic:
         adaptation = get_quiz_adaptation(
-            quiz_score=st.session_state.latest_quiz_score,
-            topic=st.session_state.quiz_topic
+            quiz_score=adaptation_score,
+            topic=adaptation_topic
         )
 
-        if st.session_state.latest_quiz_score < 60:
+        if adaptation_score < 60:
             st.warning(adaptation["message"])
-        elif st.session_state.latest_quiz_score < 80:
+        elif adaptation_score < 80:
             st.info(adaptation["message"])
         else:
             st.success(adaptation["message"])
@@ -428,12 +543,13 @@ with tab2:
         st.session_state.quiz_results = []
         st.session_state.pop("latest_quiz_score", None)
 
+        for index in range(1, 4):
+            st.session_state.pop(f"quiz_answer_{index}", None)
+
         st.rerun()
 
     if st.session_state.quiz_questions:
-        st.subheader(
-            f"Quiz Topic: {st.session_state.quiz_topic}"
-        )
+        st.subheader(f"Quiz Topic: {st.session_state.quiz_topic}")
 
         with st.expander("Course note used to create this quiz"):
             st.info(st.session_state.quiz_context)
@@ -497,9 +613,19 @@ with tab2:
                         except (ValueError, IndexError):
                             pass
 
-                st.session_state.quiz_results = quiz_results
-                st.session_state.latest_quiz_score = round(
+                score_percent = round(
                     (total_score / max_score) * 100
+                )
+
+                st.session_state.quiz_results = quiz_results
+                st.session_state.latest_quiz_score = score_percent
+
+                save_quiz_attempt(
+                    student_id=selected_student_id,
+                    course_id=selected_course_id,
+                    course_name=selected_course_name,
+                    topic=st.session_state.quiz_topic,
+                    score_percent=score_percent
                 )
 
                 st.rerun()
@@ -553,6 +679,94 @@ with tab2:
 
 with tab3:
     st.header("Learning Dashboard")
+
+    st.subheader("My Practice Progress")
+
+    quiz_attempts = load_quiz_attempts()
+
+    student_attempts = quiz_attempts[
+        (quiz_attempts["student_id"] == selected_student_id)
+        & (quiz_attempts["course_id"] == selected_course_id)
+    ].dropna(subset=["attempted_at", "score_percent"]).copy()
+
+    if student_attempts.empty:
+        st.info(
+            "No saved practice attempts yet. Complete a quiz to begin tracking progress."
+        )
+    else:
+        student_attempts = student_attempts.sort_values("attempted_at")
+
+        progress_col1, progress_col2, progress_col3 = st.columns(3)
+
+        progress_col1.metric(
+            "Practice Attempts",
+            len(student_attempts)
+        )
+        progress_col2.metric(
+            "Average Practice Score",
+            f"{student_attempts['score_percent'].mean():.0f}%"
+        )
+        progress_col3.metric(
+            "Latest Practice Score",
+            f"{student_attempts.iloc[-1]['score_percent']:.0f}%"
+        )
+
+        st.subheader("Practice Score History")
+
+        score_history = student_attempts[
+            ["attempted_at", "score_percent"]
+        ].set_index("attempted_at")
+
+        st.line_chart(
+            score_history,
+            width="stretch"
+        )
+
+        st.subheader("Average Practice Score by Topic")
+
+        topic_history = (
+            student_attempts.groupby("topic")["score_percent"]
+            .mean()
+            .sort_values()
+        )
+
+        st.bar_chart(topic_history)
+
+        st.subheader("Saved Practice Attempts")
+
+        attempts_display = student_attempts[
+            [
+                "attempted_at",
+                "topic",
+                "score_percent"
+            ]
+        ].copy()
+
+        attempts_display["attempted_at"] = (
+            attempts_display["attempted_at"]
+            .dt.strftime("%Y-%m-%d %H:%M")
+        )
+
+        attempts_display.columns = [
+            "Attempted At",
+            "Topic",
+            "Score"
+        ]
+
+        attempts_display["Score"] = (
+            attempts_display["Score"]
+            .map(lambda value: f"{value:.0f}%")
+        )
+
+        st.dataframe(
+            attempts_display.iloc[::-1],
+            width="stretch",
+            hide_index=True
+        )
+
+    st.divider()
+
+    st.subheader("Class Overview")
 
     col1, col2, col3, col4 = st.columns(4)
 
