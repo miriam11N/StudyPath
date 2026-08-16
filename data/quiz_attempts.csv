@@ -1,0 +1,3 @@
+attempt_id,student_id,course_id,course_name,topic,score_percent,attempted_at
+STU001_BUS220_20260816160646186657,STU001,BUS220,Business Analytics,Excel,0,2026-08-16 16:06:46
+STU001_BUS220_20260816160842393320,STU001,BUS220,Business Analytics,Forecasting,83,2026-08-16 16:08:42
