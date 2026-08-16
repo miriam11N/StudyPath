@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from chatbot import get_ai_response
+from chatbot import get_ai_response, grade_quiz_answer
 
 st.set_page_config(
     page_title="StudyPath",
@@ -124,6 +124,72 @@ def create_study_plan(student_id, course_id):
     return pd.DataFrame(plan)
 
 
+def apply_quiz_adaptation(plan, quiz_score, topic):
+    adapted_plan = plan.copy()
+    topic_mask = adapted_plan["Topic"] == topic
+
+    if quiz_score < 60:
+        adapted_plan.loc[
+            topic_mask,
+            "Sessions This Week"
+        ] += 1
+
+        adapted_plan.loc[
+            topic_mask,
+            "Recommended Activity"
+        ] = (
+            "Extra review session: review notes, correct quiz mistakes, "
+            "and retake a practice quiz"
+        )
+
+    elif quiz_score < 80:
+        adapted_plan.loc[
+            topic_mask,
+            "Recommended Activity"
+        ] = (
+            "Practice problems, self-quiz, and review missed concepts"
+        )
+
+    else:
+        adapted_plan.loc[
+            topic_mask,
+            "Recommended Activity"
+        ] = (
+            "Short review, then move to your next weakest topic"
+        )
+
+    return adapted_plan
+
+
+def get_quiz_adaptation(quiz_score, topic):
+    if quiz_score < 60:
+        return {
+            "message": (
+                f"Your practice score for {topic} was {quiz_score}%. "
+                f"StudyPath added an extra review session for {topic}. "
+                "Review the course notes, correct the difficult answers, "
+                "and retake a practice quiz."
+            )
+        }
+
+    if quiz_score < 80:
+        return {
+            "message": (
+                f"Your practice score for {topic} was {quiz_score}%. "
+                "You are making progress. Keep your current plan and complete "
+                "one more self-quiz before the exam."
+            )
+        }
+
+    return {
+        "message": (
+            f"Your practice score for {topic} was {quiz_score}%. "
+            f"You are doing well with {topic}. Keep one short review session, "
+            "then move more study time to your next weakest topic."
+        )
+    }
+
+
 def generate_practice_quiz(student_id, course_id, topic):
     note_results = search_course_notes(
         query=topic,
@@ -221,10 +287,23 @@ selected_enrollment = enrollments[
     & (enrollments["course_id"] == selected_course_id)
 ].iloc[0]
 
-current_plan = create_study_plan(
+base_plan = create_study_plan(
     selected_student_id,
     selected_course_id
 )
+
+current_plan = base_plan.copy()
+
+if (
+    "latest_quiz_score" in st.session_state
+    and "quiz_topic" in st.session_state
+    and st.session_state.quiz_topic
+):
+    current_plan = apply_quiz_adaptation(
+        plan=base_plan,
+        quiz_score=st.session_state.latest_quiz_score,
+        topic=st.session_state.quiz_topic
+    )
 
 weakest_topic = current_plan.iloc[0]["Topic"]
 weakest_score = current_plan.iloc[0]["Topic Score"]
@@ -271,6 +350,23 @@ with tab1:
         )
     )
 
+    if (
+        "latest_quiz_score" in st.session_state
+        and "quiz_topic" in st.session_state
+        and st.session_state.quiz_topic
+    ):
+        adaptation = get_quiz_adaptation(
+            quiz_score=st.session_state.latest_quiz_score,
+            topic=st.session_state.quiz_topic
+        )
+
+        if st.session_state.latest_quiz_score < 60:
+            st.warning(adaptation["message"])
+        elif st.session_state.latest_quiz_score < 80:
+            st.info(adaptation["message"])
+        else:
+            st.success(adaptation["message"])
+
     st.subheader("This Week's Focus")
     st.dataframe(
         current_plan,
@@ -293,34 +389,167 @@ with tab1:
         )
 
 with tab2:
-    st.header("Practice Quiz")
+    st.header("Interactive Practice Quiz")
+    st.caption(
+        "Answer the questions, submit your work, and receive AI-generated "
+        "feedback based on the selected course notes."
+    )
 
-    topic_list = current_plan["Topic"].tolist()
+    topic_list = base_plan["Topic"].tolist()
 
     selected_topic = st.selectbox(
         "Choose a topic to practice",
-        topic_list
+        topic_list,
+        key="quiz_topic_selector"
     )
 
-    if st.button("Generate Practice Quiz"):
+    if "quiz_questions" not in st.session_state:
+        st.session_state.quiz_questions = []
+
+    if "quiz_context" not in st.session_state:
+        st.session_state.quiz_context = ""
+
+    if "quiz_topic" not in st.session_state:
+        st.session_state.quiz_topic = None
+
+    if "quiz_results" not in st.session_state:
+        st.session_state.quiz_results = []
+
+    if st.button("Start New Quiz", key="start_new_quiz"):
         context, questions = generate_practice_quiz(
             selected_student_id,
             selected_course_id,
             selected_topic
         )
 
-        st.subheader("Retrieved Course Note")
-        st.info(context)
+        st.session_state.quiz_questions = questions
+        st.session_state.quiz_context = context
+        st.session_state.quiz_topic = selected_topic
+        st.session_state.quiz_results = []
+        st.session_state.pop("latest_quiz_score", None)
 
-        st.subheader(f"Practice Questions: {selected_topic}")
+        st.rerun()
 
-        for number, question in enumerate(questions, start=1):
-            st.write(f"{number}. {question}")
-
-        st.warning(
-            "Academic integrity reminder: These are practice questions for learning. "
-            "Do not submit AI-generated answers as graded coursework."
+    if st.session_state.quiz_questions:
+        st.subheader(
+            f"Quiz Topic: {st.session_state.quiz_topic}"
         )
+
+        with st.expander("Course note used to create this quiz"):
+            st.info(st.session_state.quiz_context)
+
+        with st.form("practice_quiz_form"):
+            answers = []
+
+            for index, question in enumerate(
+                st.session_state.quiz_questions,
+                start=1
+            ):
+                st.markdown(f"**Question {index}:** {question}")
+
+                answer = st.text_area(
+                    "Your answer",
+                    key=f"quiz_answer_{index}",
+                    height=110
+                )
+
+                answers.append(answer)
+
+            submitted = st.form_submit_button("Submit Answers")
+
+        if submitted:
+            if not any(answer.strip() for answer in answers):
+                st.warning(
+                    "Please answer at least one question before submitting."
+                )
+            else:
+                quiz_results = []
+                total_score = 0
+                max_score = len(st.session_state.quiz_questions) * 2
+
+                with st.spinner("Checking your practice answers..."):
+                    for question, answer in zip(
+                        st.session_state.quiz_questions,
+                        answers
+                    ):
+                        feedback = grade_quiz_answer(
+                            question=question,
+                            student_answer=answer,
+                            course_context=st.session_state.quiz_context
+                        )
+
+                        quiz_results.append(
+                            {
+                                "question": question,
+                                "answer": answer,
+                                "feedback": feedback
+                            }
+                        )
+
+                        try:
+                            score_line = feedback.splitlines()[0]
+                            score_value = int(
+                                score_line.replace("Score:", "")
+                                .split("/")[0]
+                                .strip()
+                            )
+                            total_score += score_value
+                        except (ValueError, IndexError):
+                            pass
+
+                st.session_state.quiz_results = quiz_results
+                st.session_state.latest_quiz_score = round(
+                    (total_score / max_score) * 100
+                )
+
+                st.rerun()
+
+        if st.session_state.quiz_results:
+            st.divider()
+            st.subheader("Your Results")
+
+            score_percent = st.session_state.latest_quiz_score
+
+            if score_percent >= 80:
+                st.success(
+                    f"Practice Quiz Score: {score_percent}% — Great work."
+                )
+            elif score_percent >= 60:
+                st.info(
+                    f"Practice Quiz Score: {score_percent}% — "
+                    "You are making progress. Review the feedback below."
+                )
+            else:
+                st.warning(
+                    f"Practice Quiz Score: {score_percent}% — "
+                    "Spend another study session reviewing this topic."
+                )
+
+            for index, result in enumerate(
+                st.session_state.quiz_results,
+                start=1
+            ):
+                with st.expander(f"Question {index} Feedback"):
+                    st.markdown(f"**Question:** {result['question']}")
+                    st.markdown(f"**Your answer:** {result['answer']}")
+                    st.markdown(result["feedback"])
+
+            st.warning(
+                "This is practice feedback, not an official grade. "
+                "Use it to identify what to review next."
+            )
+
+        if st.button("Clear Quiz", key="clear_quiz"):
+            st.session_state.quiz_questions = []
+            st.session_state.quiz_context = ""
+            st.session_state.quiz_topic = None
+            st.session_state.quiz_results = []
+            st.session_state.pop("latest_quiz_score", None)
+
+            for index in range(1, 4):
+                st.session_state.pop(f"quiz_answer_{index}", None)
+
+            st.rerun()
 
 with tab3:
     st.header("Learning Dashboard")
