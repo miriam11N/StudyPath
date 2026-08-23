@@ -4,17 +4,118 @@ from pathlib import Path
 from datetime import datetime
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
+from auth_service import sign_in, sign_up, sign_out
 from chatbot import (
     get_ai_response,
     grade_quiz_answer,
     generate_flashcards
 )
 
+
+def get_signed_in_email(user):
+    if isinstance(user, dict):
+        return user.get("email", "Signed-in user")
+
+    return getattr(user, "email", "Signed-in user")
+
+
+def show_login():
+    st.title("StudyPath")
+    st.caption("Sign in to access your personalized study workspace.")
+
+    sign_in_tab, create_account_tab = st.tabs(
+        ["Sign In", "Create Account"]
+    )
+
+    with sign_in_tab:
+        login_email = st.text_input(
+            "Email",
+            key="login_email"
+        )
+
+        login_password = st.text_input(
+            "Password",
+            type="password",
+            key="login_password"
+        )
+
+        if st.button("Sign In", key="login_button"):
+            if not login_email.strip() or not login_password:
+                st.warning("Enter both your email and password.")
+            else:
+                result = sign_in(
+                    login_email.strip(),
+                    login_password
+                )
+
+                if result["success"]:
+                    st.session_state["user"] = result["user"]
+                    st.rerun()
+                else:
+                    st.error(
+                        result.get(
+                            "error",
+                            "Could not sign in. Please try again."
+                        )
+                    )
+
+    with create_account_tab:
+        signup_name = st.text_input(
+            "Name",
+            key="signup_name"
+        )
+
+        signup_email = st.text_input(
+            "Email",
+            key="signup_email"
+        )
+
+        signup_password = st.text_input(
+            "Password",
+            type="password",
+            key="signup_password"
+        )
+
+        if st.button("Create Account", key="signup_button"):
+            if (
+                not signup_name.strip()
+                or not signup_email.strip()
+                or not signup_password
+            ):
+                st.warning(
+                    "Enter your name, email, and password."
+                )
+            else:
+                result = sign_up(
+                    signup_name.strip(),
+                    signup_email.strip(),
+                    signup_password
+                )
+
+                if result["success"]:
+                    st.success(
+                        "Account created. Switch to Sign In and log in."
+                    )
+                else:
+                    st.error(
+                        result.get(
+                            "error",
+                            "Could not create the account. Please try again."
+                        )
+                    )     
+
 st.set_page_config(
     page_title="StudyPath",
     page_icon="📚",
     layout="wide"
 )
+
+if "user" not in st.session_state:
+    show_login()
+    st.stop()
+
+current_user = st.session_state["user"]
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
@@ -432,6 +533,21 @@ student_options["label"] = (
 )
 
 with st.sidebar:
+    st.header("Account")
+
+    signed_in_email = get_signed_in_email(current_user)
+    st.success(f"Signed in as {signed_in_email}")
+
+    if st.button("Sign Out", key="sign_out_button"):
+        try:
+            sign_out()
+        except Exception:
+            pass
+
+        st.session_state.pop("user", None)
+        st.rerun()
+
+    st.divider()
     st.header("Student Profile")
 
     selected_label = st.selectbox(
@@ -460,8 +576,9 @@ with st.sidebar:
     selected_course_name = selected_course_label.split(" — ", 1)[1]
 
     st.divider()
-    st.caption("StudyPath uses synthetic student data for demonstration only.")
-
+    st.caption(
+        "StudyPath uses synthetic student data for demonstration only."
+    )
 selected_enrollment = enrollments[
     (enrollments["student_id"] == selected_student_id)
     & (enrollments["course_id"] == selected_course_id)
@@ -1196,3 +1313,4 @@ with tab5:
     if st.button("Clear conversation"):
         st.session_state.chat_messages = []
         st.rerun()
+
