@@ -11,3 +11,9 @@ __pycache__/
 .streamlit/secrets.toml
 __pycache__/
 *.pyc
+app_backup.py
+auth_service_backup.py
+auth_test.py
+auth_test_backup.py
+test_supabase.py
+supabase_client.py
