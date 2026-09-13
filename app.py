@@ -10,7 +10,10 @@ from auth_service import (
     sign_up,
     sign_out,
     get_profile,
-    save_onboarding
+    save_onboarding,
+    get_user_courses,
+    add_user_course,
+    delete_user_course
 )
 from chatbot import (
     get_ai_response,
@@ -29,7 +32,7 @@ def get_signed_in_email(user):
 def show_login():
     st.title("StudyPath")
     st.caption("Sign in to access your personalized study workspace.")
-
+    
     sign_in_tab, create_account_tab = st.tabs(
         ["Sign In", "Create Account"]
     )
@@ -268,6 +271,14 @@ if profile_exam_date:
         ).days
     except (TypeError, ValueError):
         profile_exam_days_away = None
+user_courses_result = get_user_courses(current_user_id)
+
+if not user_courses_result["success"]:
+    st.error("Your courses could not be loaded.")
+    st.code(user_courses_result["error"])
+    st.stop()
+
+user_courses = user_courses_result["data"]
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
@@ -659,6 +670,8 @@ def get_risk_message(score, missed_sessions):
         "for each topic."
     )
 
+selected_user_course = None
+selected_user_course_confidence = None
 
 st.title("StudyPath")
 st.subheader(f"Welcome back, {profile_display_name} 👋")
@@ -666,6 +679,7 @@ st.caption(
     f"{profile_grade_level} at {profile_school_name} · "
     f"{profile_weekly_study_hours} study hours available this week"
 )
+
 st.caption(
     "An AI-powered academic coach that creates study plans, finds weak topics, "
     "builds practice quizzes, flashcards, tracks progress, and adapts "
@@ -711,8 +725,154 @@ with st.sidebar:
         st.session_state.pop("user", None)
         st.rerun()
 
+        st.divider()
+    st.header("My Courses")
+
+    with st.expander("Add a course"):
+        with st.form("add_course_form", clear_on_submit=True):
+            new_course_code = st.text_input(
+                "Course code",
+                placeholder="Example: BUS220"
+            )
+
+            new_course_name = st.text_input(
+                "Course name",
+                placeholder="Example: Business Analytics"
+            )
+
+            new_instructor_name = st.text_input(
+                "Instructor name (optional)",
+                placeholder="Example: Professor Smith"
+            )
+
+            new_course_exam_date = st.date_input(
+                "Course exam date (optional)",
+                value=None
+            )
+
+            new_confidence_level = st.slider(
+                "Current confidence level",
+                min_value=1,
+                max_value=5,
+                value=3,
+                help="1 means you need significant help; 5 means very confident."
+            )
+
+            add_course_submitted = st.form_submit_button(
+                "Add Course"
+            )
+
+        if add_course_submitted:
+            if (
+                not new_course_code.strip()
+                or not new_course_name.strip()
+            ):
+                st.warning(
+                    "Enter both a course code and course name."
+                )
+            else:
+                add_course_result = add_user_course(
+                    user_id=current_user_id,
+                    course_code=new_course_code.strip().upper(),
+                    course_name=new_course_name.strip(),
+                    instructor_name=new_instructor_name.strip(),
+                    exam_date=new_course_exam_date,
+                    confidence_level=int(new_confidence_level)
+                )
+
+                if add_course_result["success"]:
+                    st.success("Course added.")
+                    st.rerun()
+                else:
+                    st.error("The course could not be added.")
+                    st.code(add_course_result["error"])
+
+    if user_courses:
+        course_labels = [
+            (
+                f"{course['course_code']} — "
+                f"{course['course_name']}"
+            )
+            for course in user_courses
+        ]
+
+        selected_user_course_label = st.selectbox(
+            "Choose one of your courses",
+            course_labels,
+            key="user_course_selector"
+        )
+
+        selected_user_course_index = course_labels.index(
+            selected_user_course_label
+        )
+        selected_user_course = user_courses[
+            selected_user_course_index
+        ]
+
+        selected_user_course_exam_date = selected_user_course.get(
+            "exam_date"
+        )
+        selected_user_course_confidence = selected_user_course.get(
+            "confidence_level",
+            3
+        )
+
+        st.caption(
+            "Confidence: "
+            f"{selected_user_course_confidence}/5"
+        )
+
+        if selected_user_course_exam_date:
+            try:
+                if isinstance(selected_user_course_exam_date, str):
+                    course_exam_date_value = datetime.strptime(
+                        selected_user_course_exam_date,
+                        "%Y-%m-%d"
+                    ).date()
+                else:
+                    course_exam_date_value = (
+                        selected_user_course_exam_date
+                    )
+
+                course_days_away = (
+                    course_exam_date_value - date.today()
+                ).days
+
+                if course_days_away < 0:
+                    st.caption("Course exam date has passed.")
+                elif course_days_away == 0:
+                    st.caption("Course exam: today")
+                else:
+                    st.caption(
+                        f"Course exam in {course_days_away} days"
+                    )
+            except (TypeError, ValueError):
+                pass
+
+        if st.button(
+            "Delete selected course",
+            key="delete_user_course"
+        ):
+            delete_course_result = delete_user_course(
+                course_id=selected_user_course["id"],
+                user_id=current_user_id
+            )
+
+            if delete_course_result["success"]:
+                st.success("Course deleted.")
+                st.rerun()
+            else:
+                st.error("The course could not be deleted.")
+                st.code(delete_course_result["error"])
+    else:
+        selected_user_course = None
+        st.info(
+            "You have not added any courses yet. Add one above to begin."
+        )
+
     st.divider()
-    st.header("Student Profile")
+    st.header("Demo Student Data")
+
 
     selected_label = st.selectbox(
         "Choose a student",
@@ -744,7 +904,13 @@ with st.sidebar:
         "StudyPath uses synthetic student data for demonstration only."
     )
 
- 
+if selected_user_course:
+    st.info(
+        f"Current course: "
+        f"**{selected_user_course['course_code']} — "
+        f"{selected_user_course['course_name']}** "
+        f"(confidence: {selected_user_course_confidence}/5)"
+    )
 
 selected_enrollment = enrollments[
     (enrollments["student_id"] == selected_student_id)
@@ -789,6 +955,19 @@ weakest_topic = current_plan.iloc[0]["Topic"]
 weakest_score = current_plan.iloc[0]["Topic Score"]
 
 student_context = f"""
+Personal course selected: {
+    (
+        f"{selected_user_course['course_code']} — "
+        f"{selected_user_course['course_name']}"
+    )
+    if selected_user_course
+    else "No personal course selected"
+}
+Personal course confidence: {
+    selected_user_course_confidence
+    if selected_user_course
+    else "Not set"
+}/5
 Signed-in user: {profile_display_name}
 Grade level: {profile_grade_level}
 School or university: {profile_school_name}

@@ -194,3 +194,85 @@ def save_onboarding(
             "success": False,
             "error": str(error)
         }
+
+def get_user_courses(user_id):
+    try:
+        response = (
+            supabase.table("user_courses")
+            .select("*")
+            .eq("user_id", str(user_id))
+            .order("created_at")
+            .execute()
+        )
+
+        return {
+            "success": True,
+            "data": response.data
+        }
+
+    except Exception as error:
+        return {
+            "success": False,
+            "error": str(error)
+        }
+
+
+def add_user_course(
+    user_id,
+    course_code,
+    course_name,
+    instructor_name,
+    exam_date,
+    confidence_level
+):
+    try:
+        response = (
+            supabase.table("user_courses")
+            .insert(
+                {
+                    "user_id": str(user_id),
+                    "course_code": course_code,
+                    "course_name": course_name,
+                    "instructor_name": instructor_name or None,
+                    "exam_date": (
+                        exam_date.isoformat()
+                        if exam_date else None
+                    ),
+                    "confidence_level": confidence_level
+                }
+            )
+            .execute()
+        )
+
+        return {
+            "success": True,
+            "data": response.data
+        }
+
+    except Exception as error:
+        return {
+            "success": False,
+            "error": str(error)
+        }
+
+
+def delete_user_course(course_id, user_id):
+    try:
+        response = (
+            supabase.table("user_courses")
+            .delete()
+            .eq("id", str(course_id))
+            .eq("user_id", str(user_id))
+            .execute()
+        )
+
+        return {
+            "success": True,
+            "data": response.data
+        }
+
+    except Exception as error:
+        return {
+            "success": False,
+            "error": str(error)
+        }
