@@ -226,6 +226,48 @@ if not current_profile.get("onboarding_complete", False):
 
     st.stop()
 
+profile_display_name = (
+    current_profile.get("display_name")
+    or get_signed_in_email(current_user).split("@")[0]
+)
+
+profile_grade_level = current_profile.get(
+    "grade_level",
+    "Student"
+)
+
+profile_school_name = current_profile.get(
+    "school_name",
+    "Not provided"
+)
+
+profile_exam_date = current_profile.get("exam_date")
+profile_weekly_study_hours = current_profile.get(
+    "weekly_study_hours",
+    0
+)
+profile_study_goals = current_profile.get(
+    "study_goals",
+    "No study goals saved yet."
+)
+
+profile_exam_days_away = None
+
+if profile_exam_date:
+    try:
+        if isinstance(profile_exam_date, str):
+            parsed_exam_date = datetime.strptime(
+                profile_exam_date,
+                "%Y-%m-%d"
+            ).date()
+        else:
+            parsed_exam_date = profile_exam_date
+
+        profile_exam_days_away = (
+            parsed_exam_date - date.today()
+        ).days
+    except (TypeError, ValueError):
+        profile_exam_days_away = None
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
@@ -619,6 +661,11 @@ def get_risk_message(score, missed_sessions):
 
 
 st.title("StudyPath")
+st.subheader(f"Welcome back, {profile_display_name} 👋")
+st.caption(
+    f"{profile_grade_level} at {profile_school_name} · "
+    f"{profile_weekly_study_hours} study hours available this week"
+)
 st.caption(
     "An AI-powered academic coach that creates study plans, finds weak topics, "
     "builds practice quizzes, flashcards, tracks progress, and adapts "
@@ -647,6 +694,13 @@ with st.sidebar:
 
     signed_in_email = get_signed_in_email(current_user)
     st.success(f"Signed in as {signed_in_email}")
+
+    st.caption(
+        f"{profile_grade_level} at {profile_school_name}"
+    )
+    st.caption(
+        f"Study time: {profile_weekly_study_hours} hrs/week"
+    )
 
     if st.button("Sign Out", key="sign_out_button"):
         try:
@@ -689,6 +743,9 @@ with st.sidebar:
     st.caption(
         "StudyPath uses synthetic student data for demonstration only."
     )
+
+ 
+
 selected_enrollment = enrollments[
     (enrollments["student_id"] == selected_student_id)
     & (enrollments["course_id"] == selected_course_id)
@@ -732,6 +789,13 @@ weakest_topic = current_plan.iloc[0]["Topic"]
 weakest_score = current_plan.iloc[0]["Topic Score"]
 
 student_context = f"""
+Signed-in user: {profile_display_name}
+Grade level: {profile_grade_level}
+School or university: {profile_school_name}
+Personal exam date: {profile_exam_date or "Not set"}
+Personal exam days away: {profile_exam_days_away if profile_exam_days_away is not None else "Not set"}
+Weekly available study time: {profile_weekly_study_hours} hours
+Personal study goals: {profile_study_goals}
 Student ID: {selected_student_id}
 Selected course: {selected_course_name}
 Latest recorded course quiz score: {selected_enrollment['latest_quiz_score']}%
@@ -754,19 +818,37 @@ with tab1:
         "Latest Course Quiz Score",
         f"{selected_enrollment['latest_quiz_score']}%"
     )
-    col2.metric(
-        "Exam in",
-        f"{selected_enrollment['exam_days_away']} days"
-    )
+
+    if profile_exam_days_away is None:
+        col2.metric(
+            "Your next exam",
+            "Not set"
+        )
+    elif profile_exam_days_away < 0:
+        col2.metric(
+            "Your next exam",
+            "Date passed"
+        )
+    elif profile_exam_days_away == 0:
+        col2.metric(
+            "Your next exam",
+            "Today"
+        )
+    else:
+        col2.metric(
+            "Your next exam",
+            f"{profile_exam_days_away} days"
+        )
+
     col3.metric(
-        "Weekly Study Time",
-        f"{selected_enrollment['weekly_study_hours']} hrs"
+        "Your Weekly Study Time",
+        f"{profile_weekly_study_hours} hrs"
     )
+
     col4.metric(
         "Missed Sessions",
         selected_enrollment["missed_sessions"]
     )
-
     st.info(
         get_risk_message(
             selected_enrollment["latest_quiz_score"],
