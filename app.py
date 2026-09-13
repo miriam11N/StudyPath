@@ -1,11 +1,17 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, date
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from auth_service import sign_in, sign_up, sign_out
+from auth_service import (
+    sign_in,
+    sign_up,
+    sign_out,
+    get_profile,
+    save_onboarding
+)
 from chatbot import (
     get_ai_response,
     grade_quiz_answer,
@@ -95,7 +101,7 @@ def show_login():
 
                 if result["success"]:
                     st.success(
-                        "Account created. Switch to Sign In and log in."
+                        "Account created. You can now sign in."
                     )
                 else:
                     st.error(
@@ -103,7 +109,8 @@ def show_login():
                             "error",
                             "Could not create the account. Please try again."
                         )
-                    )     
+                    )
+
 
 st.set_page_config(
     page_title="StudyPath",
@@ -116,6 +123,109 @@ if "user" not in st.session_state:
     st.stop()
 
 current_user = st.session_state["user"]
+
+current_user_id = (
+    current_user.get("id")
+    if isinstance(current_user, dict)
+    else getattr(current_user, "id", None)
+)
+
+if not current_user_id:
+    st.error("Your account could not be identified. Please sign in again.")
+
+    if st.button("Return to Sign In"):
+        st.session_state.pop("user", None)
+        st.rerun()
+
+    st.stop()
+
+profile_result = get_profile(current_user_id)
+
+if not profile_result["success"]:
+    st.error("Your profile could not be loaded.")
+    st.code(profile_result["error"])
+    st.stop()
+
+current_profile = profile_result["data"]
+
+if not current_profile.get("onboarding_complete", False):
+    st.title("Welcome to StudyPath")
+    st.caption(
+        "Tell us a little about your schedule and goals so we can "
+        "personalize your study experience."
+    )
+
+    with st.form("onboarding_form"):
+        grade_level = st.selectbox(
+            "Grade level",
+            [
+                "High school freshman",
+                "High school sophomore",
+                "High school junior",
+                "High school senior",
+                "College freshman",
+                "College sophomore",
+                "College junior",
+                "College senior",
+                "Graduate student",
+                "Other"
+            ]
+        )
+
+        school_name = st.text_input(
+            "School or university"
+        )
+
+        exam_date = st.date_input(
+            "Next important exam date",
+            min_value=date.today()
+        )
+
+        weekly_study_hours = st.number_input(
+            "Hours available to study each week",
+            min_value=1,
+            max_value=80,
+            value=5,
+            step=1
+        )
+
+        study_goals = st.text_area(
+            "Study goals",
+            placeholder=(
+                "Example: Improve my Business Analytics grade, prepare "
+                "for my midterm, and study consistently each week."
+            ),
+            height=120
+        )
+
+        submitted = st.form_submit_button(
+            "Save and Start Studying"
+        )
+
+    if submitted:
+        if not school_name.strip() or not study_goals.strip():
+            st.warning(
+                "Please enter your school or university and your study goals."
+            )
+        else:
+            save_result = save_onboarding(
+                user_id=current_user_id,
+                grade_level=grade_level,
+                school_name=school_name.strip(),
+                exam_date=exam_date,
+                weekly_study_hours=int(weekly_study_hours),
+                study_goals=study_goals.strip()
+            )
+
+            if save_result["success"]:
+                st.success("Your study profile has been saved.")
+                st.rerun()
+            else:
+                st.error("Your onboarding information could not be saved.")
+                st.code(save_result["error"])
+
+    st.stop()
+
 
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
